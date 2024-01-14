@@ -1,31 +1,28 @@
-import React, {useState, useEffect} from 'react'
-import validator from 'validator';
-import Loader from '../../Components/Loader/Loader';
-import { Link } from 'react-router-dom';
-import ShowMessage from '../../Components/Message/Message';
-import { Authentication } from '../../Context/UserContext/AuthenticationContext';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import validator from "validator";
+import Loader from "../../Components/Loader/Loader";
+import { Link } from "react-router-dom";
+import ShowMessage from "../../Components/Message/Message";
+import { Authentication } from "../../Context/UserContext/AuthenticationContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUP() {
-
-  const {createAccount} = Authentication()
-  const [name, setName] = useState("")
+  const { createAccount } = Authentication();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nameHidden, setNameHidden] = useState(false)
+  const [nameHidden, setNameHidden] = useState(false);
   const [emailHidden, setEmailHidden] = useState(false);
   const [passwordHidden, setPasswordHidden] = useState(false);
-  const [signUpDisabled, setSignUpDisabled] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+  const [signUpDisabled, setSignUpDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if(name.length < 10){
-      setNameHidden(true)
-    }
-    else{
-      setNameHidden(false)
+    if (name.length < 10) {
+      setNameHidden(true);
+    } else {
+      setNameHidden(false);
     }
 
     if (validator.isEmail(email)) {
@@ -40,34 +37,32 @@ export default function SignUP() {
       setPasswordHidden(false);
     }
 
-    if(!emailHidden && !passwordHidden && !nameHidden){
-      setSignUpDisabled(false)
-    }
-    else{
-      setSignUpDisabled(true)
+    if (!emailHidden && !passwordHidden && !nameHidden) {
+      setSignUpDisabled(false);
+    } else {
+      setSignUpDisabled(true);
     }
   }, [email, password, name]);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const created = await createAccount(email, password, name);
-    setIsLoading(false)
-    if(created){
+    setIsLoading(false);
+    if (created) {
       ShowMessage("Account Created! Kindly Login!", "success");
-      navigate('/login')
+      navigate("/login");
+    } else {
+      ShowMessage("Failed to create Account", "error");
     }
-    else{
-      ShowMessage("Failed to create Account", "error")
-    }
-  }
+  };
 
   return (
     <div className="min-w-[30vw] w-fit h-fit border-[0.5px] border-slate-900 rounded-lg py-5 px-8 text-center">
       <h1 className="text-3xl">SignUP</h1>
       <p className="text-sm my-2">Create Your Account Now!</p>
       <form action="" className="flex flex-col" onSubmit={handleSignUp}>
-      <label htmlFor="name" className="mb-1 w-full text-left">
+        <label htmlFor="name" className="mb-1 w-full text-left">
           Name:
         </label>
         <input
@@ -79,7 +74,9 @@ export default function SignUP() {
           value={name}
         />
         <p className="w-full text-left text-xs text-red-700">
-          {nameHidden ? "*Name must contain greater than 10 characters including spaces" : ""}
+          {nameHidden
+            ? "*Name must contain greater than 10 characters including spaces"
+            : ""}
         </p>
         <label htmlFor="mail" className="mb-1 mt-3 w-full text-left">
           Email:
@@ -109,15 +106,23 @@ export default function SignUP() {
         <p className="w-full text-left text-xs text-red-700">
           {passwordHidden ? "Password must be 8 characters long" : ""}
         </p>
-        {(isLoading)?<Loader color={'white'} height={'10'} width={'10'}/>:<input
-          type="submit"
-          value="SignUP"
-          className="my-5 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer"
-          disabled={signUpDisabled}
-        />}
+        {isLoading ? (
+          <Loader color={"white"} height={"10"} width={"10"} />
+        ) : (
+          <input
+            type="submit"
+            value="SignUP"
+            className="my-5 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer"
+            disabled={signUpDisabled}
+          />
+        )}
 
-        <Link to={'/createAccount'} className="mb-2 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer">Login</Link>
+        <Link
+          to={"/createAccount"}
+          className="mb-2 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer">
+          Login
+        </Link>
       </form>
     </div>
-  )
+  );
 }
