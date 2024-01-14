@@ -1,14 +1,17 @@
 import { ID} from "appwrite";
 import { account } from "./config";
 
-class Authentication{
+class Authenticator{
     async loginViaEmail(email, password){
         try {
-            const userData = await account.createEmailSession(email, password)
-            console.log(userData)
+            await account.createEmailSession(email, password)
+            const userData = await account.get()
+            const user = {id : userData.$id, name : userData.name, email : userData.email, phone : userData.phone, emailVerification : userData.emailVerification, phoneVerification : userData.phoneVerification, preferences : userData.prefs}
+            return user
         } catch (error) {
             alert("Failed")
             console.log(error)
+            return null
         }
     }
 
@@ -23,5 +26,5 @@ class Authentication{
     }
 }
 
-const authentication = new Authentication();
-export default authentication;
+const authenticator = new Authenticator();
+export default authenticator;

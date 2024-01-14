@@ -1,10 +1,14 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 const AuthenticationContext = createContext({
     user : null,
-
+    loginViaEmail: async (email, password) => {},
+    autoLogin: () => {},
+    logout: () => {},
+    createAccount: (email, password, name) => {}
 });
 
-const AuthenticationProvider = AuthenticationContext.Provider;
-
-export default AuthenticationProvider;
+export const AuthenticationProvider = AuthenticationContext.Provider;
+export const Authentication = () => {
+    return useContext(AuthenticationContext);
+}
