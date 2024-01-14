@@ -4,6 +4,7 @@ import { Authentication } from "../../Context/UserContext/AuthenticationContext"
 import ShowMessage from "../../Components/Message/Message";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../Components/Loader/Loader";
+import { Link } from "react-router-dom";
 
 
 export default function Login() {
@@ -40,9 +41,9 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true)
-    await loginViaEmail(email, password)
+    const loggedin = await loginViaEmail(email, password)
     setIsLoading(false)
-    if(user){
+    if(loggedin){
       ShowMessage("Login SuccessFull!", 'success')
       navigate('/')
     }
@@ -87,9 +88,12 @@ export default function Login() {
         {(isLoading)?<Loader color={'white'} height={'10'} width={'10'}/>:<input
           type="submit"
           value="Login"
-          className="my-5 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700"
+          className="my-5 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer"
           disabled={loginDisabled}
         />}
+
+        <Link to={'/signUP'} className="mb-2 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer">SignUP</Link>
+        <Link to={'/signUP'} className="text-slate-800 text-xs underline">Forgot Password?</Link>
       </form>
     </div>
   );

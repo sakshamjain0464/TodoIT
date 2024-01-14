@@ -17,11 +17,10 @@ class Authenticator{
 
     async createAccountViaEmail(email, password, name){
         try {
-            const userData = await account.create(ID.unique(), email, password, name)
-            console.log(userData)
+            await account.create(ID.unique(), email, password, name)
+            return true
         } catch (error) {
-            alert("Failed")
-            console.log(error)
+            return false
         }
     }
 }

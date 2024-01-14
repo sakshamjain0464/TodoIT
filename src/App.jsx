@@ -10,8 +10,9 @@ import { ToastContainer } from 'react-toastify'
 function App() {
   const [user, setUser] = useState(null);
 
-  const createAccount = (email, password, name) => {
-    console.log("Account Created")
+  const createAccount = async (email, password, name) => {
+    const created = await authenticator.createAccountViaEmail(email, password, name);
+    return created;
   }
 
   const autoLogin = () => {
@@ -21,6 +22,12 @@ function App() {
   const loginViaEmail = async (email, password) => {
     const userData = await authenticator.loginViaEmail(email, password);
     setUser(userData)
+    if(userData){
+      return true
+    }
+    else{
+      return false
+    }
   }
 
   const logout = () => {
