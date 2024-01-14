@@ -1,13 +1,18 @@
 import { useState } from 'react'
-
+import authentication from './Appwrite/authentication'
+import Navbar from './Components/Navbar/Navbar'
+import MainSection from './Components/MainSection/MainSection'
 import './App.css'
+import Footer from './Components/Footer/Footer'
 
 function App() {
 
   return (
-    <h1 className="text-3xl font-bold bg-slate-800 nderline">
-      I am TodoIT
-    </h1>
+    <>
+      <Navbar />
+      <MainSection />
+      <Footer/>
+    </>
   )
 }
 
