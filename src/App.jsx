@@ -35,8 +35,12 @@ function App() {
     }
   };
 
-  const logout = () => {
-    console.log("logout");
+  const logout = async () => {
+    const logoutSuccess = await authenticator.logout();
+    if (logoutSuccess) {
+      setUser(null);
+    }
+    return logoutSuccess;
   };
 
   return (

@@ -62,11 +62,9 @@ export default function Profile() {
               {user.phone ? (
                 <span>
                   {user.phone}{" "}
-                  {user.phoneVerification ? (
-                    <span>Verified</span>
-                  ) : (
-                    <span>Verify</span>
-                  )}
+                  <span className="ml-3 rounded-md text-white bg-green-700 px-3 py-1 cursor-no-drop">
+                    Verified
+                  </span>
                 </span>
               ) : (
                 <span className="hover:underline cursor-pointer">
