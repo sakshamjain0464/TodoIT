@@ -6,7 +6,8 @@ const AuthenticationContext = createContext({
     loginViaEmail: async (email, password) => { },
     autoLogin: () => { },
     logout: () => { },
-    createAccount: (email, password, name) => { }
+    createAccount: (email, password, name) => { },
+    loginViaGoogle: () => { }
 });
 
 export const AuthenticationProvider = AuthenticationContext.Provider;

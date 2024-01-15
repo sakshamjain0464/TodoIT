@@ -20,14 +20,19 @@ function App() {
     return created;
   };
 
-  const autoLogin = () => {
-    console.log("autologin");
+  const autoLogin = async () => {
+    const userData = await authenticator.autoLogin();
+    setUser(userData);
+    if (userData) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const loginViaEmail = async (email, password) => {
     const userData = await authenticator.loginViaEmail(email, password);
     setUser(userData);
-    console.log(userData);
     if (userData) {
       return true;
     } else {
@@ -43,9 +48,19 @@ function App() {
     return logoutSuccess;
   };
 
+  const loginViaGoogle = async () => {
+    const userData = await authenticator.loginViaGoogle();
+    setUser(userData);
+    if (userData) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
+
   return (
     <AuthenticationProvider
-      value={{ user, autoLogin, loginViaEmail, logout, createAccount }}>
+      value={{ user, autoLogin, loginViaEmail, logout, createAccount, loginViaGoogle }}>
       <Navbar />
       <MainSection />
       <Footer />

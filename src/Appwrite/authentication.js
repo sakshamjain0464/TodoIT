@@ -9,7 +9,18 @@ class Authenticator {
             const user = { id: userData.$id, name: userData.name, email: userData.email, phone: userData.phone, emailVerification: userData.emailVerification, phoneVerification: userData.phoneVerification, preferences: userData.prefs }
             return user
         } catch (error) {
-            alert("Failed")
+            console.log(error)
+            return null
+        }
+    }
+
+    async loginViaGoogle(){
+        try {
+            await account.createOAuth2Session('google', 'http://localhost:5173/', 'http://localhost:5173/login');
+            const userData = await account.get()
+            const user = { id: userData.$id, name: userData.name, email: userData.email, phone: userData.phone, emailVerification: userData.emailVerification, phoneVerification: userData.phoneVerification, preferences: userData.prefs }
+            return user
+        } catch (error) {
             console.log(error)
             return null
         }
@@ -33,6 +44,16 @@ class Authenticator {
         catch (error) {
             console.log(error)
             return false;
+        }
+    }
+
+    async autoLogin() {
+        try {
+            const userData = await account.get('current')
+            const user = { id: userData.$id, name: userData.name, email: userData.email, phone: userData.phone, emailVerification: userData.emailVerification, phoneVerification: userData.phoneVerification, preferences: userData.prefs }
+            return user
+        } catch (error) {
+            return null
         }
     }
 }
