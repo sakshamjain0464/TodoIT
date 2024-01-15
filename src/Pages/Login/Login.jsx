@@ -18,10 +18,10 @@ export default function Login() {
   const { loginViaEmail, user, loginViaGoogle } = Authentication();
 
   useEffect(() => {
-    if(user != null){
-      navigate('/');
+    if (user != null) {
+      navigate("/");
     }
-  })
+  });
 
   useEffect(() => {
     if (validator.isEmail(email)) {
@@ -119,7 +119,9 @@ export default function Login() {
         </Link>
       </form>
       <div className="flex items-center justify-center h-fit w-full mt-5">
-        <button className="flex items-center w-full bg-gray-900 border border-gray-300 rounded-xl shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-800 focus:outline-none" onClick={handleLoginViaGoogle}>
+        <button
+          className="flex items-center w-full bg-gray-900 border border-gray-300 rounded-xl shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-800 focus:outline-none"
+          onClick={handleLoginViaGoogle}>
           <svg
             className="h-6 w-6 mr-2"
             xmlns="http://www.w3.org/2000/svg;"

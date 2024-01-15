@@ -56,11 +56,18 @@ function App() {
     } else {
       return false;
     }
-  } 
+  };
 
   return (
     <AuthenticationProvider
-      value={{ user, autoLogin, loginViaEmail, logout, createAccount, loginViaGoogle }}>
+      value={{
+        user,
+        autoLogin,
+        loginViaEmail,
+        logout,
+        createAccount,
+        loginViaGoogle,
+      }}>
       <Navbar />
       <MainSection />
       <Footer />

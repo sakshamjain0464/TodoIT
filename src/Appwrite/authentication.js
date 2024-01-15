@@ -14,7 +14,7 @@ class Authenticator {
         }
     }
 
-    async loginViaGoogle(){
+    async loginViaGoogle() {
         try {
             await account.createOAuth2Session('google', 'http://localhost:5173/', 'http://localhost:5173/login');
             const userData = await account.get()

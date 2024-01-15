@@ -10,21 +10,17 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(user == null){
+    if (user == null) {
       (async function () {
-        setLoading(true)
+        setLoading(true);
         const loggedin = await autoLogin();
-        setLoading(false)
-        if(!loggedin){
+        setLoading(false);
+        if (!loggedin) {
           navigate("/login");
         }
       })();
     }
   });
 
-  return (
-    <div>
-      {(loading)?<Loader/>:<h1>Home</h1>}
-    </div>
-  );
+  return <div>{loading ? <Loader /> : <h1>Home</h1>}</div>;
 }
