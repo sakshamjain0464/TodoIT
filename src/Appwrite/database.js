@@ -19,6 +19,7 @@ class Database {
     async addTodoToDataBase(todo) {
         try {
             const todoData = await databases.createDocument(databaseId, todoCollection, ID.unique(), todo)
+            console.log(todoData)
             return todoData;
         } catch (error) {
             console.error(error)
@@ -30,6 +31,16 @@ class Database {
         try {
             const updateData = await databases.updateDocument(databaseId, todoCollection, todoId, updates)
             return updateData;
+        } catch (error) {
+            console.error(error)
+            return null
+        }
+    }
+
+    async deleteTodoFromDatabase(todoId){
+        try {
+            const todoData = await databases.deleteDocument(databaseId, todoCollection, todoId)
+            return todoData;
         } catch (error) {
             console.error(error)
             return null

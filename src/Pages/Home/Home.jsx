@@ -42,20 +42,32 @@ export default function Home() {
 
     if (addTodo) {
       ShowMessage("New Todo Added", "success");
-      getTodos();
+      setTodos((prev) => [...prev, addedTodo])
     } else {
       ShowMessage("Failed to create new todo", "error");
     }
   };
-  const updateTodo = () => {
-    console.log("added");
+  const updateTodo = async(todoId, values) => {
+    const updateData = await database.updateTodoToDatabase(todoId, values);
+    if (updateData) {
+      getTodos();
+      return true;
+    } else {
+      return false;
+    }
   };
-  const removeTodo = () => {
-    console.log("added");
+  const removeTodo = async (todoId) => {
+    const removeData = await database.deleteTodoFromDatabase(todoId);
+    if (removeData) {
+      console.log(todos)
+      setTodos(todos.filter((todo) => todoId!=todo.$id))
+      ShowMessage("Todo Deleted SuccessFully", 'success')
+    } else {
+      ShowMessage("Cannot Delete Todo", 'error')
+    }
   };
   const completeTodo = async (todoId, value) => {
     const updateData = await database.updateTodoToDatabase(todoId, {
-      user: user.id,
       completed: value,
     });
     if (updateData) {

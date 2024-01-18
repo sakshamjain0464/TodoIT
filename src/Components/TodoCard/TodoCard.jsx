@@ -11,7 +11,7 @@ export default function TodoCard({ todo }) {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
   const [loading, setLoading] = useState(false);
-  const { updateTodo, completeTodo } = Todos();
+  const { updateTodo, completeTodo, removeTodo } = Todos();
   const { tags } = Tags();
 
   const editButtonHandler = () => {
@@ -22,8 +22,23 @@ export default function TodoCard({ todo }) {
   const todoChangesSave = () => {
     todo.title = title;
     todo.description = description;
-    setIsEditing(false);
-    setExpanded(false);
+
+    const updates = {
+      title : todo.title,
+      description: todo.description,
+      tags: todo.tags
+    }
+    
+    const updated = updateTodo(todo.$id, updates)
+    if(updated){
+      ShowMessage("Todo Updated SuccessFully!", 'success')
+      setIsEditing(false);
+      setExpanded(false);
+    }
+    else{
+      ShowMessage("Cannot Update Todo!", 'error')
+    }
+    
   };
 
   const todoChangesCancel = () => {
@@ -41,15 +56,22 @@ export default function TodoCard({ todo }) {
     const completed = await completeTodo(todo.$id, !isComplete);
     setLoading(true);
     if (completed) {
-      setIsComplete((prev) => !prev);
+      todo.completed = !isComplete
       !isComplete
         ? ShowMessage("Todo Marked Complete!", "success")
         : ShowMessage("Todo Marked Incomplete!", "success");
+      setIsComplete((prev) => !prev);
     } else {
       ShowMessage("Cannot mark complete now!", "error");
     }
     setLoading(false);
   };
+
+  const removeTodoHandler = async() => {
+    setLoading(true)
+    await removeTodo(todo.$id)
+    setLoading(false)
+  }
 
   return (
     <div
@@ -124,7 +146,7 @@ export default function TodoCard({ todo }) {
                   : "bg-white border-slate-900"
               } cursor-pointer`}
               onClick={completeTodoHandler}></div>
-            <i className="fa-solid fa-trash mr-4 cursor-pointer" />
+            <i className="fa-solid fa-trash mr-4 cursor-pointer" onClick={removeTodoHandler}/>
             <i
               className={`fa-solid ${
                 expanded

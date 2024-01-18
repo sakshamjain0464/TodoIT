@@ -21,7 +21,7 @@ export default function TodoContainer({ tag }) {
         setLoading(false);
       })();
     }
-  }, [todos, setTodos, addTodo]);
+  }, [todos, setTodos]);
 
   return (
     <>
