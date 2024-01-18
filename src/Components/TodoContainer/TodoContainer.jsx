@@ -5,7 +5,7 @@ import Loader from "../Loader/Loader";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import TodoCard from "../TodoCard/TodoCard";
 
-export default function TodoContainer() {
+export default function TodoContainer({tag}) {
   const { todos, getTodos, setTodos } = Todos();
   const [loading, setLoading] = useState(false);
   const { user } = Authentication();
@@ -28,12 +28,12 @@ export default function TodoContainer() {
       {loading ? (
         <Loader />
       ) : todos != null && todos.length != 0 ? (
-        <div>
-          <div className="flex flex-wrap gap-4 p-5 transition-all duration-200 ease-in">
-            {todos.map((todo) => (
+          <div className="flex flex-wrap w-full h-fit gap-y-4 transition-all duration-200 ease-in">
+            {(tag == 'all')?todos.map((todo) => (
               <TodoCard todo={todo} key={todo.$id} />
+            )):todos.map((todo) => (
+              todo.tags.includes(tag)&&<TodoCard todo={todo} key={todo.$id} />
             ))}
-          </div>
         </div>
       ) : (
         <div>No todos</div>

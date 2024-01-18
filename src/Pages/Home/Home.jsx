@@ -6,11 +6,13 @@ import database from "../../Appwrite/database";
 import TodoContainer from "../../Components/TodoContainer/TodoContainer";
 import { TodoProvider } from "../../Context/TodoContext/TodoContext";
 import ShowMessage from "../../Components/Message/Message";
+import { tags } from "../../Components/TodoCard/tags";
 
 export default function Home() {
   const { autoLogin, user, logout } = Authentication();
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState(null);
+  const [searchTag, setSearchTag] = useState('all');
   const navigate = useNavigate();
 
   const getTodos = async () => {
@@ -65,12 +67,11 @@ export default function Home() {
               <select
                 name=""
                 id=""
-                className="mt-3 w-64 py-1 px-2 rounded-md focus:outline-none border-[0.5px] border-slate-950">
-                <option value="Hello">Hello</option>
-                <option value="Hello">Bello</option>
-                <option value="Hello">Trello</option>
+                className="mt-3 w-64 py-1 px-2 rounded-md focus:outline-none border-[0.5px] border-slate-950" value={searchTag} onInput={(e) => setSearchTag(e.target.value)}>
+                <option value="all">All</option>
+                {tags && tags.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
               </select>
-              <div className="w-full h-fit overflow-y-scroll mt-3 sm:mt-8">
+              <div className="w-full h-[80%] overflow-y-auto mt-3 sm:mt-8">
                 <TodoProvider
                   value={{
                     todos,
@@ -81,7 +82,7 @@ export default function Home() {
                     getTodos,
                     setTodos,
                   }}>
-                  <TodoContainer />
+                  <TodoContainer tag={searchTag}/>
                 </TodoProvider>
               </div>
             </div>
