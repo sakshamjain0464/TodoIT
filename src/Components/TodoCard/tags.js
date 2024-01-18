@@ -1,0 +1,1 @@
+export const tags = ['hello', 'bye', 'bello', 'jhello']

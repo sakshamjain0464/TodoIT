@@ -6,7 +6,6 @@ import Footer from "./Components/Footer/Footer";
 import { AuthenticationProvider } from "./Context/UserContext/AuthenticationContext";
 import authenticator from "./Appwrite/authentication";
 import { ToastContainer } from "react-toastify";
-import { sample } from "./Context/UserContext/sampleUser";
 
 function App() {
   const [user, setUser] = useState(null);

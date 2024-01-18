@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-import { sample } from "./sampleUser";
 
 const AuthenticationContext = createContext({
     user: null,

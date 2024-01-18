@@ -56,13 +56,7 @@ export default function Login() {
 
   const handleLoginViaGoogle = async () => {
     setIsLoading(true);
-    const loggedin = await loginViaGoogle();
-    if (loggedin) {
-      ShowMessage("Login SuccessFull!", "success");
-      navigate("/");
-    } else {
-      ShowMessage("Login Failed", "error");
-    }
+    loginViaGoogle();
   };
 
   return (

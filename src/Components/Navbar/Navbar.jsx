@@ -11,6 +11,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
+      
       ShowMessage("Logout Successful", "success");
       navigate("/login");
     } else {
