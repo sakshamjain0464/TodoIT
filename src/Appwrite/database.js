@@ -16,9 +16,9 @@ class Database {
         }
     }
 
-    async addTodoToDataBase(todo){
+    async addTodoToDataBase(todo) {
         try {
-            const todoData = await databases.createDocument(databaseId,todoCollection, ID.unique(), todo)
+            const todoData = await databases.createDocument(databaseId, todoCollection, ID.unique(), todo)
             return todoData;
         } catch (error) {
             console.error(error)
@@ -26,9 +26,9 @@ class Database {
         }
     }
 
-    async updateTodoToDatabase(todoId, updates){
+    async updateTodoToDatabase(todoId, updates) {
         try {
-            const updateData = await databases.updateDocument(databaseId,todoCollection, todoId, updates)
+            const updateData = await databases.updateDocument(databaseId, todoCollection, todoId, updates)
             return updateData;
         } catch (error) {
             console.error(error)
