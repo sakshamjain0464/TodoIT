@@ -26,6 +26,16 @@ class Database {
         }
     }
 
+    async updateTodoToDatabase(todoId, updates){
+        try {
+            const updateData = await databases.updateDocument(databaseId,todoCollection, todoId, updates)
+            return updateData;
+        } catch (error) {
+            console.error(error)
+            return null
+        }
+    }
+
     async fetchTags(userID) {
         try {
             const tagsData = await databases.listDocuments(databaseId, tagsCollection, [Query.equal('user', userID)])

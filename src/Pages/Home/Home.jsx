@@ -42,7 +42,7 @@ export default function Home() {
 
     if (addTodo) {
       ShowMessage("New Todo Added", "success");
-      getTodos()
+      getTodos();
     } else {
       ShowMessage("Failed to create new todo", "error");
     }
@@ -53,8 +53,17 @@ export default function Home() {
   const removeTodo = () => {
     console.log("added");
   };
-  const completeTodo = () => {
-    console.log("added");
+  const completeTodo = async (todoId, value) => {
+    const updateData = await database.updateTodoToDatabase(todoId, {
+      user: user.id,
+      completed: value,
+    });
+    if (updateData) {
+      getTodos();
+      return true;
+    } else {
+      return false;
+    }
   };
 
   useEffect(() => {

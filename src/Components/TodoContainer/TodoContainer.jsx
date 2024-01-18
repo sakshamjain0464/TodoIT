@@ -21,7 +21,7 @@ export default function TodoContainer({ tag }) {
         setLoading(false);
       })();
     }
-  },[todos, setTodos, addTodo]);
+  }, [todos, setTodos, addTodo]);
 
   return (
     <>
@@ -38,13 +38,15 @@ export default function TodoContainer({ tag }) {
                       <TodoCard todo={todo} key={todo.$id} />
                     )
                 )}
-                <div className="h-36 max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full">
-                  <div className="h-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-lg cursor-pointer active:shadow-none">
-                      <div className="w-full h-full flex items-center justify-center" onClick={addTodo}>
-                        <i className="fa-plus text-3xl"></i>
-                      </div>
-                  </div>
+            <div className="h-36 max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full">
+              <div className="h-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-lg cursor-pointer active:shadow-none">
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  onClick={addTodo}>
+                  <i className="fa-plus text-3xl"></i>
                 </div>
+              </div>
+            </div>
           </div>
         )
       )}
