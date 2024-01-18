@@ -1,4 +1,4 @@
-import { Query } from 'appwrite';
+import { ID, Query } from 'appwrite';
 import { databases } from './config'
 
 const databaseId = import.meta.env.VITE_APPWRITE_DATABASE_ID;
@@ -16,12 +16,20 @@ class Database {
         }
     }
 
+    async addTodoToDataBase(todo){
+        try {
+            const todoData = await databases.createDocument(databaseId,todoCollection, ID.unique(), todo)
+            return todoData;
+        } catch (error) {
+            console.error(error)
+            return null
+        }
+    }
+
     async fetchTags(userID) {
         try {
-            console.log("fetchTags")
             const tagsData = await databases.listDocuments(databaseId, tagsCollection, [Query.equal('user', userID)])
-            console.log(tagsData)
-            const tags = tagsData.map((tag) => tag.tagName)
+            const tags = tagsData.documents.map((tag) => tag.tagName)
             return tags
         } catch (error) {
             console.log(error)

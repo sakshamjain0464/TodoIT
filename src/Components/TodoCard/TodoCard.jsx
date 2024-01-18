@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { tags } from "./tags";
+import { Tags } from "../../Context/TagsContext/TagsContext";
 
 export default function TodoCard({ todo }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -7,6 +7,7 @@ export default function TodoCard({ todo }) {
   const [expanded, setExpanded] = useState(false)
   const [title, setTitle] = useState(todo.title)
   const [description, setDescription] = useState(todo.description)
+  const {tags} = Tags()
 
   const editButtonHandler = () => {
     if(!isComplete){
@@ -34,7 +35,7 @@ export default function TodoCard({ todo }) {
   }
 
   return (
-    <div className={`${(expanded)?'max-h-96 h-96 w-full':'max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full h-30'} transition-all duration-200 ease-in px-2`}>
+    <div className={`${(expanded)?'max-h-96 h-96 w-full':'max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full h-36'} transition-all duration-200 ease-in px-2`}>
       <div
         className={`relative ${(isComplete)?'bg-gray-300':'bg-white'} h-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-lg`}
         id={todo.$id}>
@@ -54,7 +55,8 @@ export default function TodoCard({ todo }) {
           <i className="fa-solid fa-pen" />
         </div>
         <div className="h-fit flex"><p className="italic">~{todo.tags.join(', ')}</p><select name="" id="" className={`${(isEditing)?'block':'hidden'} active:outline-none focus:outline-none`} onInput={handleTagSelect}>
-            {tags.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
+              <option key={'no-tag'} value={'no-tag'}>{'no-tag'}</option>
+              {tags && tags.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
           </select></div>
         <div className={`h-4 mt-3 flex items-center ${(isEditing)?'hidden':'block'}`}>
           <div className={`h-4 w-4 mr-4 border-2 rounded sm ${(isComplete)?'bg-green-700':'bg-white'}`} onClick={() => setIsComplete((prev) => !prev)}></div>

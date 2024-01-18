@@ -6,13 +6,14 @@ import database from "../../Appwrite/database";
 import TodoContainer from "../../Components/TodoContainer/TodoContainer";
 import { TodoProvider } from "../../Context/TodoContext/TodoContext";
 import ShowMessage from "../../Components/Message/Message";
-import { tags } from "../../Components/TodoCard/tags";
+import { Tags } from "../../Context/TagsContext/TagsContext";
 
 export default function Home() {
   const { autoLogin, user, logout } = Authentication();
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState(null);
-  const [searchTag, setSearchTag] = useState('all');
+  const [searchTag, setSearchTag] = useState("all");
+  const { tags, getTags } = Tags();
   const navigate = useNavigate();
 
   const getTodos = async () => {
@@ -29,8 +30,22 @@ export default function Home() {
     }
   };
 
-  const addTodo = () => {
-    console.log("added");
+  const addTodo = async () => {
+    const newTodo = {
+      title: "New Todo",
+      description: "New Todo Description",
+      user: user.id,
+      completed: false,
+    };
+
+    const addedTodo = await database.addTodoToDataBase(newTodo);
+
+    if (addTodo) {
+      ShowMessage("New Todo Added", "success");
+      getTodos()
+    } else {
+      ShowMessage("Failed to create new todo", "error");
+    }
   };
   const updateTodo = () => {
     console.log("added");
@@ -55,6 +70,19 @@ export default function Home() {
     }
   });
 
+  useEffect(() => {
+    if (user != null) {
+      (async function () {
+        setLoading(true);
+        const tagsFetched = await getTags();
+        setLoading(false);
+        if (!tagsFetched) {
+          navigate("/login");
+        }
+      })();
+    }
+  }, [user]);
+
   return (
     <div className="h-full w-[95%]">
       {user && (
@@ -67,9 +95,16 @@ export default function Home() {
               <select
                 name=""
                 id=""
-                className="mt-3 w-64 py-1 px-2 rounded-md focus:outline-none border-[0.5px] border-slate-950" value={searchTag} onInput={(e) => setSearchTag(e.target.value)}>
+                className="mt-3 w-64 py-1 px-2 rounded-md focus:outline-none border-[0.5px] border-slate-950"
+                value={searchTag}
+                onInput={(e) => setSearchTag(e.target.value)}>
                 <option value="all">All</option>
-                {tags && tags.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
+                {tags &&
+                  tags.map((tag) => (
+                    <option key={tag} value={tag}>
+                      {tag}
+                    </option>
+                  ))}
               </select>
               <div className="w-full h-[80%] overflow-y-auto mt-3 sm:mt-8">
                 <TodoProvider
@@ -82,7 +117,7 @@ export default function Home() {
                     getTodos,
                     setTodos,
                   }}>
-                  <TodoContainer tag={searchTag}/>
+                  <TodoContainer tag={searchTag} />
                 </TodoProvider>
               </div>
             </div>
