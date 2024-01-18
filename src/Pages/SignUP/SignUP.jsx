@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import validator from "validator";
 import Loader from "../../Components/Loader/Loader";
 import { Link } from "react-router-dom";

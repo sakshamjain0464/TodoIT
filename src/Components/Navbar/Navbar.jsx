@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import ShowMessage from "../Message/Message";
@@ -11,7 +11,6 @@ export default function Navbar() {
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
-      
       ShowMessage("Logout Successful", "success");
       navigate("/login");
     } else {

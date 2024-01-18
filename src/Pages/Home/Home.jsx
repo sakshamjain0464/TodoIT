@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import Loader from "../../Components/Loader/Loader";
@@ -42,12 +42,12 @@ export default function Home() {
 
     if (addTodo) {
       ShowMessage("New Todo Added", "success");
-      setTodos((prev) => [...prev, addedTodo])
+      setTodos((prev) => [...prev, addedTodo]);
     } else {
       ShowMessage("Failed to create new todo", "error");
     }
   };
-  const updateTodo = async(todoId, values) => {
+  const updateTodo = async (todoId, values) => {
     const updateData = await database.updateTodoToDatabase(todoId, values);
     if (updateData) {
       getTodos();
@@ -59,11 +59,11 @@ export default function Home() {
   const removeTodo = async (todoId) => {
     const removeData = await database.deleteTodoFromDatabase(todoId);
     if (removeData) {
-      console.log(todos)
-      setTodos(todos.filter((todo) => todoId!=todo.$id))
-      ShowMessage("Todo Deleted SuccessFully", 'success')
+      console.log(todos);
+      setTodos(todos.filter((todo) => todoId != todo.$id));
+      ShowMessage("Todo Deleted SuccessFully", "success");
     } else {
-      ShowMessage("Cannot Delete Todo", 'error')
+      ShowMessage("Cannot Delete Todo", "error");
     }
   };
   const completeTodo = async (todoId, value) => {

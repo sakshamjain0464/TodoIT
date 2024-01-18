@@ -37,7 +37,7 @@ class Database {
         }
     }
 
-    async deleteTodoFromDatabase(todoId){
+    async deleteTodoFromDatabase(todoId) {
         try {
             const todoData = await databases.deleteDocument(databaseId, todoCollection, todoId)
             return todoData;

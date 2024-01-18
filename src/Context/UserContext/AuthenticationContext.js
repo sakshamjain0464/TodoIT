@@ -2,10 +2,10 @@ import { createContext, useContext } from "react";
 
 const AuthenticationContext = createContext({
     user: null,
-    loginViaEmail: async (email, password) => { },
+    loginViaEmail: async () => { },
     autoLogin: () => { },
     logout: () => { },
-    createAccount: (email, password, name) => { },
+    createAccount: () => { },
     loginViaGoogle: () => { }
 });
 

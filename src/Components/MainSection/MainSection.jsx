@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import { TagsProvider } from "../../Context/TagsContext/TagsContext";
@@ -9,25 +9,24 @@ export default function MainSection() {
   const [tags, setTags] = useState(null);
 
   const getTags = async () => {
-    if(user){
+    if (user) {
       const tagList = await database.fetchTags(user.id);
       setTags(tagList);
-      if(tagList){
-        return true
-      }
-      else{
-        return false
+      if (tagList) {
+        return true;
+      } else {
+        return false;
       }
     }
-  }
+  };
 
   const addTag = () => {
-    console.log('jf')
-  }
+    console.log("jf");
+  };
 
   const removeTag = () => {
-    console.log('jf')
-  }
+    console.log("jf");
+  };
 
   return (
     <section className="h-[85vh] w-full flex items-center justify-center">

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  const { user, logout } = Authentication();
+  const { user} = Authentication();
   const [editVisible, setEditVisible] = useState();
   const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ export default function Profile() {
     if (!user) {
       navigate("/login");
     }
-  }, []);
+  });
 
   return (
     <>

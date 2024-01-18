@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Tags } from "../../Context/TagsContext/TagsContext";
 import { Todos } from "../../Context/TodoContext/TodoContext";
 import ShowMessage from "../Message/Message";
 import Loader from "../Loader/Loader";
+import PropTypes from "prop-types";
 
 export default function TodoCard({ todo }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -15,30 +16,30 @@ export default function TodoCard({ todo }) {
   const { tags } = Tags();
 
   const editButtonHandler = () => {
-      setIsEditing(true);
-      setExpanded(true);
+    setIsEditing(true);
+    setExpanded(true);
   };
 
-  const todoChangesSave = () => {
+  const todoChangesSave = async() => {
+    setLoading(true)
     todo.title = title;
     todo.description = description;
 
     const updates = {
-      title : todo.title,
+      title: todo.title,
       description: todo.description,
-      tags: todo.tags
-    }
-    
-    const updated = updateTodo(todo.$id, updates)
-    if(updated){
-      ShowMessage("Todo Updated SuccessFully!", 'success')
+      tags: todo.tags,
+    };
+
+    const updated = await updateTodo(todo.$id, updates);
+    if (updated) {
+      ShowMessage("Todo Updated SuccessFully!", "success");
       setIsEditing(false);
       setExpanded(false);
+    } else {
+      ShowMessage("Cannot Update Todo!", "error");
     }
-    else{
-      ShowMessage("Cannot Update Todo!", 'error')
-    }
-    
+    setLoading(false)
   };
 
   const todoChangesCancel = () => {
@@ -52,11 +53,11 @@ export default function TodoCard({ todo }) {
     todo.tags.push(e.target.value);
   };
 
-  const completeTodoHandler = async (value) => {
-    const completed = await completeTodo(todo.$id, !isComplete);
+  const completeTodoHandler = async () => {
     setLoading(true);
+    const completed = await completeTodo(todo.$id, !isComplete);
     if (completed) {
-      todo.completed = !isComplete
+      todo.completed = !isComplete;
       !isComplete
         ? ShowMessage("Todo Marked Complete!", "success")
         : ShowMessage("Todo Marked Incomplete!", "success");
@@ -67,11 +68,11 @@ export default function TodoCard({ todo }) {
     setLoading(false);
   };
 
-  const removeTodoHandler = async() => {
-    setLoading(true)
-    await removeTodo(todo.$id)
-    setLoading(false)
-  }
+  const removeTodoHandler = async () => {
+    setLoading(true);
+    await removeTodo(todo.$id);
+    setLoading(false);
+  };
 
   return (
     <div
@@ -80,7 +81,7 @@ export default function TodoCard({ todo }) {
           ? "max-h-96 h-96 w-full"
           : "max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full h-36"
       } transition-all duration-200 ease-in px-2 flex items-center justify-center`}>
-      {!loading && (
+      {(!loading)?(
         <div
           className={`relative ${
             isComplete ? "bg-gray-300" : "bg-white"
@@ -146,7 +147,10 @@ export default function TodoCard({ todo }) {
                   : "bg-white border-slate-900"
               } cursor-pointer`}
               onClick={completeTodoHandler}></div>
-            <i className="fa-solid fa-trash mr-4 cursor-pointer" onClick={removeTodoHandler}/>
+            <i
+              className="fa-solid fa-trash mr-4 cursor-pointer"
+              onClick={removeTodoHandler}
+            />
             <i
               className={`fa-solid ${
                 expanded
@@ -172,7 +176,12 @@ export default function TodoCard({ todo }) {
             </button>
           </div>
         </div>
-      )}
+      ):<Loader/>}
     </div>
   );
+}
+
+
+TodoCard.propTypes = {
+  todo: PropTypes.object.isRequired
 }
