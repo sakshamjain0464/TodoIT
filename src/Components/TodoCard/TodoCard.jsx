@@ -20,6 +20,28 @@ export default function TodoCard({ todo }) {
     setExpanded(true);
   };
 
+  const handleTitleInput = (e) => {
+    const newTitle = e.target.value.trim();
+
+    if(newTitle.length > 200){
+      ShowMessage("Title cannot be more than 200 characters", 'warning')
+    }
+    else{
+      setTitle(newTitle)
+    }
+  }
+
+  const handleDescriptionInput = (e) => {
+    const newDesc = e.target.value.trim();
+
+    if(newDesc.length > 800){
+      ShowMessage("Description cannot be more than 800 characters", 'warning')
+    }
+    else{
+      setDescription(newDesc)
+    }
+  }
+
   const todoChangesSave = async () => {
     setLoading(true);
     todo.title = title;
@@ -97,37 +119,35 @@ export default function TodoCard({ todo }) {
         expanded
           ? "max-h-96 h-96 w-full"
           : "max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full h-36"
-      } transition-all duration-200 ease-in px-2 flex items-center justify-center`}>
+      } transition-all duration-300 ease-in px-2 flex items-center justify-center`}>
       {!loading ? (
         <div
           className={`relative ${
             isComplete ? "bg-gray-300" : "bg-white"
-          } h-full w-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-lg`}>
+          } h-full w-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-xl transition-all duration-500 ease-in`}>
           <input
             className={`text-xl mb-2 w-full text-ellipsis overflow-hidden bg-transparent ${
               isComplete
                 ? "line-through"
                 : "focus:outline-none active:outline-none"
-            }`}
+            } cursor-text`}
             value={title}
             disabled={isComplete || !isEditing ? true : false}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={handleTitleInput}
           />
           <textarea
-            className={`text-sm w-full text-ellipsis ${
-              expanded ? "overflow-y-auto" : "overflow-y-hidden"
-            } bg-transparent resize-none ${
+            className={`text-sm w-full text-ellipsis bg-transparent resize-none ${
               isComplete ? "line-through" : ""
             } 'focus:outline-none active:outline-none mb-5' ${
-              expanded ? "h-[250px]" : "h-[auto]"
-            }`}
+              expanded ? "h-[250px] overflow-y-auto" : "h-[22px] overflow-y-hidden"
+            } transition-all duration-300 ease-in cursor-text`}
             value={description}
             disabled={isComplete || !isEditing ? true : false}
             rows={expanded ? 500 : 1}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleDescriptionInput}
           />
           <div
-            className={`absolute top-1 right-2 text-sm cursor-pointer ${
+            className={`absolute top-1 right-2 sm:text-sm text-xl cursor-pointer ${
               !isEditing && !isComplete ? "block" : "hidden"
             }`}
             onClick={editButtonHandler}>
@@ -154,13 +174,13 @@ export default function TodoCard({ todo }) {
             </select>
           </div>
           <div
-            className={`h-4 mt-3 flex items-center ${
+            className={`h-4 mt-3 flex items-center  ${
               isEditing ? "hidden" : "block"
             }`}>
             <div
               className={`h-4 w-4 mr-4 border-2 rounded sm ${
                 isComplete
-                  ? "bg-green-700 border-green-950"
+                  ? "bg-green-500 border-green-950"
                   : "bg-white border-slate-900"
               } cursor-pointer`}
               onClick={completeTodoHandler}></div>
@@ -203,3 +223,4 @@ export default function TodoCard({ todo }) {
 TodoCard.propTypes = {
   todo: PropTypes.object.isRequired,
 };
+
