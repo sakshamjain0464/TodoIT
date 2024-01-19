@@ -13,7 +13,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState(null);
   const [searchTag, setSearchTag] = useState("all");
-  const { tags, getTags } = Tags();
+  const { tags } = Tags();
   const navigate = useNavigate();
 
   const getTodos = async () => {
@@ -36,6 +36,7 @@ export default function Home() {
       description: "New Todo Description",
       user: user.id,
       completed: false,
+      tags: ["Due"],
     };
 
     const addedTodo = await database.addTodoToDataBase(newTodo);
@@ -67,11 +68,9 @@ export default function Home() {
     }
   };
   const completeTodo = async (todoId, value) => {
-    const updateData = await database.updateTodoToDatabase(todoId, {
-      completed: value,
-    });
+    const updateData = await database.updateTodoToDatabase(todoId, value);
+    console.log(value);
     if (updateData) {
-      getTodos();
       return true;
     } else {
       return false;
@@ -90,19 +89,6 @@ export default function Home() {
       })();
     }
   });
-
-  useEffect(() => {
-    if (user != null) {
-      (async function () {
-        setLoading(true);
-        const tagsFetched = await getTags();
-        setLoading(false);
-        if (!tagsFetched) {
-          navigate("/login");
-        }
-      })();
-    }
-  }, [user]);
 
   return (
     <div className="h-full w-[95%]">

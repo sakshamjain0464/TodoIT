@@ -20,8 +20,8 @@ export default function TodoCard({ todo }) {
     setExpanded(true);
   };
 
-  const todoChangesSave = async() => {
-    setLoading(true)
+  const todoChangesSave = async () => {
+    setLoading(true);
     todo.title = title;
     todo.description = description;
 
@@ -39,7 +39,7 @@ export default function TodoCard({ todo }) {
     } else {
       ShowMessage("Cannot Update Todo!", "error");
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const todoChangesCancel = () => {
@@ -55,8 +55,25 @@ export default function TodoCard({ todo }) {
 
   const completeTodoHandler = async () => {
     setLoading(true);
-    const completed = await completeTodo(todo.$id, !isComplete);
-    if (completed) {
+    let marked = false;
+    if (isComplete) {
+      const completedIndex = todo.tags.indexOf("Completed");
+      todo.tags.splice(completedIndex, 1);
+      todo.tags.push("Due");
+      marked = await completeTodo(todo.$id, {
+        completed: false,
+        tags: todo.tags,
+      });
+    } else {
+      const dueIndex = todo.tags.indexOf("Due");
+      todo.tags.splice(dueIndex, 1);
+      todo.tags.push("Completed");
+      marked = await completeTodo(todo.$id, {
+        completed: true,
+        tags: todo.tags,
+      });
+    }
+    if (marked) {
       todo.completed = !isComplete;
       !isComplete
         ? ShowMessage("Todo Marked Complete!", "success")
@@ -81,7 +98,7 @@ export default function TodoCard({ todo }) {
           ? "max-h-96 h-96 w-full"
           : "max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 w-full h-36"
       } transition-all duration-200 ease-in px-2 flex items-center justify-center`}>
-      {(!loading)?(
+      {!loading ? (
         <div
           className={`relative ${
             isComplete ? "bg-gray-300" : "bg-white"
@@ -176,12 +193,13 @@ export default function TodoCard({ todo }) {
             </button>
           </div>
         </div>
-      ):<Loader/>}
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 }
 
-
 TodoCard.propTypes = {
-  todo: PropTypes.object.isRequired
-}
+  todo: PropTypes.object.isRequired,
+};
