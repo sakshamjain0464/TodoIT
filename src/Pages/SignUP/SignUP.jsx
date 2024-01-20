@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ShowMessage from "../../Components/Message/Message";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import { useNavigate } from "react-router-dom";
+import GoogleLoginButton from "../../Components/GoogleLoginButton/GoogleLoginButton";
 
 export default function SignUP() {
   const { createAccount } = Authentication();
@@ -123,6 +124,7 @@ export default function SignUP() {
           Login
         </Link>
       </form>
+      <GoogleLoginButton />
     </div>
   );
 }
