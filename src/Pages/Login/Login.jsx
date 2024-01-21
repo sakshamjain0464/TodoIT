@@ -56,18 +56,18 @@ export default function Login() {
   };
 
   return (
-    <div className="w-fit h-fit border-[0.5px] border-slate-900 rounded-lg py-5 px-8 text-center">
+    <div className="sm:w-fit sm:h-fit h-[85%] w-[85%] border-[0.5px] border-slate-900 rounded-lg py-5 sm:px-8 px-5 text-center">
       <h1 className="text-3xl">Login</h1>
       <p className="text-sm my-3">Login to Your Account Now</p>
       <form action="" className="flex flex-col" onSubmit={handleLogin}>
-        <label htmlFor="mail" className="mb-1 mt-3 w-full text-left">
+        <label htmlFor="mail" className="mb-1 sm:mt-3 w-full text-left">
           Email:
         </label>
         <input
           type="email"
           name=""
           id="mail"
-          className="border-[0.5px] active:outline-none focus:outline-0 border-slate-600 w-72 px-3 py-2 rounded-md"
+          className="border-[0.5px] active:outline-none focus:outline-0 border-slate-600 sm:w-72 w-full px-3 py-2 rounded-md"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
@@ -81,7 +81,7 @@ export default function Login() {
           type="password"
           name=""
           id=""
-          className="border-[0.5px] active:outline-none focus:outline-0 border-slate-600 w-72 px-3 py-2 rounded-md"
+          className="border-[0.5px] active:outline-none focus:outline-0 border-slate-600 sm:w-72 w-full px-3 py-2 rounded-md"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
@@ -104,10 +104,11 @@ export default function Login() {
           className="mb-2 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer">
           SignUP
         </Link>
-        <Link to={"/signUP"} className="text-slate-800 text-xs underline">
+        <Link to={"/signUP"} className="text-slate-800 mb-3 text-xs underline">
           Forgot Password?
         </Link>
       </form>
+      <p className="lg:text-2xl">OR</p>
       <GoogleLoginButton />
     </div>
   );

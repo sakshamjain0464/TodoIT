@@ -6,14 +6,13 @@ import database from "../../Appwrite/database";
 import TodoContainer from "../../Components/TodoContainer/TodoContainer";
 import { TodoProvider } from "../../Context/TodoContext/TodoContext";
 import ShowMessage from "../../Components/Message/Message";
-import { Tags } from "../../Context/TagsContext/TagsContext";
 
 export default function Home() {
   const { autoLogin, user, logout } = Authentication();
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState(null);
   const [searchTag, setSearchTag] = useState("all");
-  const { tags } = Tags();
+  const tags = ["Important", "Due", "Completed"];
   const navigate = useNavigate();
 
   const getTodos = async () => {
@@ -91,18 +90,18 @@ export default function Home() {
   });
 
   return (
-    <div className="h-full w-[95%]">
+    <div className="sm:h-full h-fit w-[95%] min-h-screen sm:min-h-full">
       {user && (
         <div className="h-full w-full flex items-center justify-center pt-5">
           {loading ? (
             <Loader />
           ) : (
             <div className="h-full w-full flex flex-col items-center">
-              <h1 className="mt-2 text-3xl">Your Todos</h1>
+              <h1 className="mt-2 text-xl sm:text-3xl">Your Todos</h1>
               <select
                 name=""
                 id=""
-                className="mt-3 w-64 py-1 px-2 rounded-md focus:outline-none border-[0.5px] border-slate-950"
+                className="mt-3 sm:w-64 w-[80%] py-1 px-2 rounded-md focus:outline-none border-[0.5px] border-slate-950"
                 value={searchTag}
                 onInput={(e) => setSearchTag(e.target.value)}>
                 <option value="all">All</option>
@@ -113,7 +112,7 @@ export default function Home() {
                     </option>
                   ))}
               </select>
-              <div className="w-full h-[80%] overflow-y-auto mt-3 sm:mt-8">
+              <div className="w-full h-[80%] sm:overflow-y-auto overflow-y-visible mt-3 sm:mt-8">
                 <TodoProvider
                   value={{
                     todos,

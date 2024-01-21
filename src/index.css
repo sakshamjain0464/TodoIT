@@ -5,3 +5,27 @@
 body{
     overflow: hidden;
 }
+
+@media screen and (max-width: 560px){
+    body{
+        overflow-y: visible;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: gray;
+    border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+    background: gainsboro;
+}

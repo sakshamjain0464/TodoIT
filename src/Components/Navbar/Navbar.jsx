@@ -20,43 +20,43 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 h-[8vh]">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
+    <nav className="bg-gray-800 w-full h-fit sm:h-[8vh] flex items-center justify-center">
+      <div className="flex justify-center w-full xl:px-36 sm:px-6 ">
+        <div className="relative flex w-full h-16 items-center justify-between">
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <NavLink
                 to={"/"}
-                className="text-2xl text-white font-bold tracking-wider">
+                className="text-2xl 2xl:text-4xl text-white font-bold tracking-wider">
                 TodoIT
               </NavLink>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <div className="relative ml-3">
+            {user && <div className="relative ml-3">
               <div className="h-full">
                 <button
                   type="button"
-                  className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none items-center py-2 px-3 hover:bg-slate-900 transition-all duration-300"
+                  className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none items-center px-0 py-0 sm:py-1 sm:px-3 sm:m-0 mr-3 hover:bg-slate-900 transition-all duration-300"
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
                   onClick={() => setProfileMenuOpen((prev) => !prev)}>
-                  <div className="h-8 w-8 rounded-full overflow-hidden">
+                  <div className="h-10 w-10 2xl:h-16 2xl:w-16 rounded-full overflow-hidden">
                     {user && user.preferences.profile ? (
-                      <img
+                      <img className="h-full w-full"
                         src={user.preferences.profile}
                         alt=""
                       />
                     ) : (
                       <img
-                        className="h-full w-full invert-[100%]"
+                        className="h-10 w-10 2xl:h-16 2xl:w-16 rounded-full invert-[100%]"
                         src="./src/assets/user.png"
                         alt=""
                       />
                     )}
                   </div>
-                  {user && <h1 className="hidden sm:block text-white ml-3">{user.name}</h1>}
+                  {user && <h1 className="hidden sm:block 2xl:text-2xl text-white ml-2 font-semibold tracking-wide">{user.name}</h1>}
                 </button>
                 
               </div>
@@ -85,7 +85,7 @@ export default function Navbar() {
                   Sign out
                 </button>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </div>

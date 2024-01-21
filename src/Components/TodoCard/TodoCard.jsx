@@ -21,7 +21,7 @@ export default function TodoCard({ todo }) {
   };
 
   const handleTitleInput = (e) => {
-    const newTitle = e.target.value.trim();
+    const newTitle = e.target.value;
 
     if(newTitle.length > 200){
       ShowMessage("Title cannot be more than 200 characters", 'warning')
@@ -32,7 +32,7 @@ export default function TodoCard({ todo }) {
   }
 
   const handleDescriptionInput = (e) => {
-    const newDesc = e.target.value.trim();
+    const newDesc = e.target.value;
 
     if(newDesc.length > 800){
       ShowMessage("Description cannot be more than 800 characters", 'warning')
@@ -124,7 +124,7 @@ export default function TodoCard({ todo }) {
         <div
           className={`relative ${
             isComplete ? "bg-gray-300" : "bg-white"
-          } h-full w-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-xl transition-all duration-500 ease-in`}>
+          } h-full w-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-xl transition-all ${(expanded)?'duration-500':`duration-300 hover:scale-105 ${(!isComplete)?'hover:bg-gradient-to-r hover:from-white hover:to-gray-200':''}`} ease-in`}>
           <input
             className={`text-xl mb-2 w-full text-ellipsis overflow-hidden bg-transparent ${
               isComplete
@@ -147,7 +147,7 @@ export default function TodoCard({ todo }) {
             onChange={handleDescriptionInput}
           />
           <div
-            className={`absolute top-1 right-2 sm:text-sm text-xl cursor-pointer ${
+            className={`absolute top-1 right-2 sm:text-sm text-base cursor-pointer ${
               !isEditing && !isComplete ? "block" : "hidden"
             }`}
             onClick={editButtonHandler}>

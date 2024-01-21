@@ -59,9 +59,9 @@ export default function SignUP() {
   };
 
   return (
-    <div className="min-w-[30vw] w-fit h-fit border-[0.5px] border-slate-900 rounded-lg py-5 px-8 text-center">
-      <h1 className="text-3xl">SignUP</h1>
-      <p className="text-sm my-2">Create Your Account Now!</p>
+    <div className="sm:min-w-[30vw] w-[85%] sm:max-h-[90%] sm:w-fit h-fit border-[0.5px] border-slate-900 rounded-lg my-auto py-5 px-8 sm:px-5 text-center">
+      <h1 className="text-2xl">SignUP</h1>
+      <p className="text-sm my-1">Create Your Account Now!</p>
       <form action="" className="flex flex-col" onSubmit={handleSignUp}>
         <label htmlFor="name" className="mb-1 w-full text-left">
           Name:
@@ -79,7 +79,7 @@ export default function SignUP() {
             ? "*Name must contain greater than 10 characters including spaces"
             : ""}
         </p>
-        <label htmlFor="mail" className="mb-1 mt-3 w-full text-left">
+        <label htmlFor="mail" className="mb-1 mt-2 w-full text-left">
           Email:
         </label>
         <input
@@ -93,7 +93,7 @@ export default function SignUP() {
         <p className="w-full text-left text-xs text-red-700">
           {emailHidden ? "*Email must be valid" : ""}
         </p>
-        <label htmlFor="" className="mb-1 mt-3 w-full text-left">
+        <label htmlFor="" className="mb-1 mt-2 w-full text-left">
           Password:
         </label>
         <input
@@ -119,11 +119,12 @@ export default function SignUP() {
         )}
 
         <Link
-          to={"/createAccount"}
+          to={"/login"}
           className="mb-2 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer">
           Login
         </Link>
       </form>
+      <div>OR</div>
       <GoogleLoginButton />
     </div>
   );
