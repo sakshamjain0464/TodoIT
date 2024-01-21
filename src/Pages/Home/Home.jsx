@@ -76,19 +76,6 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (user == null) {
-      (async function () {
-        setLoading(true);
-        const loggedin = await autoLogin();
-        setLoading(false);
-        if (!loggedin) {
-          navigate("/login");
-        }
-      })();
-    }
-  });
-
   return (
     <div className="sm:h-full h-fit w-[95%] min-h-screen sm:min-h-full">
       {user && (

@@ -1,4 +1,4 @@
-import React from "react";
+
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -7,6 +7,7 @@ import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
 import SignUP from "./Pages/SignUP/SignUP.jsx";
+import AddPhone from "./Pages/AddPhone/AddPhone.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+      {
+        path: 'profile/addPhone',
+        element: <AddPhone />
+      }
     ],
   },
 ]);

@@ -35,6 +35,16 @@ class Authenticator {
         }
     }
 
+    async addPhoneNumberToAccount(phone, password){
+        try {
+            const data = await account.updatePhone(phone, password);
+            console.log(data)
+            return true
+        } catch (error) {
+            return false
+        }
+    }
+
     async logout() {
         try {
             const data = await account.deleteSession('current');

@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import MainSection from "./Components/MainSection/MainSection";
 import Footer from "./Components/Footer/Footer";
 import { AuthenticationProvider } from "./Context/UserContext/AuthenticationContext";
 import authenticator from "./Appwrite/authentication";
 import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const createAccount = async (email, password, name) => {
     const created = await authenticator.createAccountViaEmail(
@@ -56,6 +59,28 @@ function App() {
     }
   };
 
+  const addPhoneNumber = async (phone, password) => {
+    const userData = await authenticator.addPhoneNumberToAccount(phone,password);
+    if (userData) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
+
+  useEffect(() => {
+    if (user == null) {
+      (async function () {
+        setLoading(true);
+        const loggedin = await autoLogin();
+        setLoading(false);
+        if (!loggedin) {
+          navigate("/login");
+        }
+      })();
+    }
+  },[user]);
+
   return (
     <AuthenticationProvider
       value={{
@@ -65,9 +90,10 @@ function App() {
         logout,
         createAccount,
         loginViaGoogle,
+        addPhoneNumber
       }}>
       <Navbar />
-      <MainSection />
+      <MainSection loading={loading}/>
       <Footer />
       <ToastContainer />
     </AuthenticationProvider>

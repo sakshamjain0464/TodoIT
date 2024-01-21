@@ -59,7 +59,7 @@ export default function SignUP() {
   };
 
   return (
-    <div className="sm:min-w-[30vw] w-[85%] sm:max-h-[90%] sm:w-fit h-fit border-[0.5px] border-slate-900 rounded-lg my-auto py-5 px-8 sm:px-5 text-center">
+    <div className="sm:min-w-[30vw] w-[85%] sm:max-h-[90%] sm:w-fit h-fit border-[0.5px] border-slate-900 rounded-lg my-auto py-5 px-8 sm:px-5 sm:mt-0 mt-6 text-center">
       <h1 className="text-2xl">SignUP</h1>
       <p className="text-sm my-1">Create Your Account Now!</p>
       <form action="" className="flex flex-col" onSubmit={handleSignUp}>

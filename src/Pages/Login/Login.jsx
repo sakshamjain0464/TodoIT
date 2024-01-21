@@ -56,7 +56,7 @@ export default function Login() {
   };
 
   return (
-    <div className="sm:w-fit sm:h-fit h-[85%] w-[85%] border-[0.5px] border-slate-900 rounded-lg py-5 sm:px-8 px-5 text-center">
+    <div className="sm:w-fit sm:h-fit h-[85%] w-[85%] border-[0.5px] border-slate-900 rounded-lg py-5 sm:px-8 px-5 sm:mt-0 mt-5 text-center">
       <h1 className="text-3xl">Login</h1>
       <p className="text-sm my-3">Login to Your Account Now</p>
       <form action="" className="flex flex-col" onSubmit={handleLogin}>
