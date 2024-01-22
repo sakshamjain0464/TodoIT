@@ -9,6 +9,7 @@ import Profile from "./Pages/Profile/Profile.jsx";
 import SignUP from "./Pages/SignUP/SignUP.jsx";
 import AddPhone from "./Pages/AddPhone/AddPhone.jsx";
 import VerifyEmail from "./Pages/verifyEmail/VerifyEmail.jsx";
+import UploadProfile from "./Pages/UploadProfile/UploadProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'profile/verifyEmail',
         element: <VerifyEmail/>
+      },
+      {
+        path: 'profile/uploadProfile',
+        element: <UploadProfile />
       },
     ],
   },

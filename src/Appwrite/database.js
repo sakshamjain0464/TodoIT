@@ -1,8 +1,10 @@
 import { ID, Query } from 'appwrite';
-import { databases } from './config'
+import { databases, storage } from './config'
+import { account } from './config';
 
 const databaseId = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const todoCollection = import.meta.env.VITE_APPWRITE_TODO_COLLECTION_ID
+const photoBucket = import.meta.env.VITE_APPWRITE_PHOTOS_BUCKET_ID
 
 class Database {
     async fetchTodos(userID) {
@@ -43,6 +45,18 @@ class Database {
         } catch (error) {
             console.error(error)
             return null
+        }
+    }
+
+    async addProfilePhotoToStorage(user, photo){
+        try {
+            const photoData = await storage.createFile(photoBucket, ID.unique(), photo);
+            const photoURL = await storage.getFileView(photoBucket, photoData.$id);
+            await account.updatePrefs({...user.preferences, profile:photoURL.href})
+            return true;
+        } catch (error) {
+            console.error(error)
+            return false
         }
     }
 }

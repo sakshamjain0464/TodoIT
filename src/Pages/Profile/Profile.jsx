@@ -15,13 +15,12 @@ const UserProfile = () => {
 
   const handleCreateEmailVerification = async () => {
     const created = await createEmailVerification();
-    if(created){
-      ShowMessage("Verification Sent to Email!", 'success');
+    if (created) {
+      ShowMessage("Verification Sent to Email!", "success");
+    } else {
+      ShowMessage("Cannot create verification", "error");
     }
-    else{
-      ShowMessage("Cannot create verification", 'error')
-    }
-  }
+  };
 
   useEffect(() => {
     if (user == null) {
@@ -73,11 +72,13 @@ const UserProfile = () => {
                     />
                   )}
                   <div className="group absolute top-0 rounded-full h-full w-full bg-transparent hover:backdrop-blur-md flex items-center justify-center">
-                    <i
-                      className="fa-regular fa-pen-to-square text-[0px] group-hover:text-2xl cursor-pointer hover:text-gray-800"
-                      onMouseEnter={() => setShowProfileTooltip(true)}
-                      onMouseLeave={() => setShowProfileTooltip(false)}
-                    />
+                    <Link to={'/profile/uploadProfile'}>
+                      <i
+                        className="fa-regular fa-pen-to-square text-[0px] group-hover:text-2xl cursor-pointer hover:text-gray-800"
+                        onMouseEnter={() => setShowProfileTooltip(true)}
+                        onMouseLeave={() => setShowProfileTooltip(false)}
+                      />
+                    </Link>
                     <Tooltip
                       tooltipFunc={showProfileTooltip}
                       message={"Change Profile Photo"}
@@ -110,7 +111,9 @@ const UserProfile = () => {
                 {user.emailVerification ? (
                   <i className="fa-solid fa-check text-green-600" />
                 ) : (
-                  <button className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3" onClick={handleCreateEmailVerification}>
+                  <button
+                    className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3"
+                    onClick={handleCreateEmailVerification}>
                     Verify
                   </button>
                 )}

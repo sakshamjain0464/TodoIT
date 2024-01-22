@@ -6,6 +6,7 @@ import { AuthenticationProvider } from "./Context/UserContext/AuthenticationCont
 import authenticator from "./Appwrite/authentication";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import database from "./Appwrite/database";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -85,6 +86,15 @@ function App() {
       return false;
     }
   }
+
+  const uploadProfilePhoto = async (photo) => {
+    const data = await database.addProfilePhotoToStorage(user, photo)
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   
 
   useEffect(() => {
@@ -111,7 +121,8 @@ function App() {
         loginViaGoogle,
         addPhoneNumber,
         createEmailVerification,
-        verifyEmail
+        verifyEmail,
+        uploadProfilePhoto
       }}>
       <Navbar />
       <MainSection loading={loading}/>
