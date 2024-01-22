@@ -47,7 +47,8 @@ const UserProfile = () => {
                 style={
                   user.preferences.banner
                     ? {
-                        background: `url('${user.preferences.banner} center')`,
+                        background: `url('${user.preferences.banner}')`,
+                        backgroundPosition:'center',
                         backgroundSize: "cover",
                         backgroundColor: "rgba(255,255,255,0.5)",
                         backdropFilter: "brightness(50%)",
@@ -87,7 +88,7 @@ const UserProfile = () => {
                   </div>
                 </div>
                 <div className="group absolute top-2 right-5 w-fit h-fit">
-                  <Link
+                  <Link to={'/profile/uploadBanner'}
                     className="bg-slate-900 sm:text-base text-xs text-white px-3 py-1 rounded-md h-0 w-0"
                     onMouseEnter={() => setShowBannerTooltip(true)}
                     onMouseLeave={() => setShowBannerTooltip(false)}>

@@ -95,6 +95,24 @@ function App() {
       return false;
     }
   }
+
+  const uploadBanner = async (photo) => {
+    const data = await database.addProfileBannerToStorage(user, photo)
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const uploadBannerFromUnsplash = async (url) => {
+    const data = await database.addProfileBannerFromUnsplash(user, url)
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   
 
   useEffect(() => {
@@ -122,7 +140,9 @@ function App() {
         addPhoneNumber,
         createEmailVerification,
         verifyEmail,
-        uploadProfilePhoto
+        uploadProfilePhoto,
+        uploadBanner,
+        uploadBannerFromUnsplash
       }}>
       <Navbar />
       <MainSection loading={loading}/>

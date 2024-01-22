@@ -11,7 +11,7 @@ const FileUploader = ({file}) => {
 
     if (uploadedFile) {
       const allowedTypes = ['image/jpeg', 'image/png'];
-
+        
       if (!allowedTypes.includes(uploadedFile.type)) {
         ShowMessage("Only JPG and PNG are accepted", 'warning')
         handleRemoveChoosenFile()

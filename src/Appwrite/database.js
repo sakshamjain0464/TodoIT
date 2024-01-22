@@ -59,6 +59,28 @@ class Database {
             return false
         }
     }
+
+    async addProfileBannerToStorage(user, photo){
+        try {
+            const photoData = await storage.createFile(photoBucket, ID.unique(), photo);
+            const photoURL = await storage.getFileView(photoBucket, photoData.$id);
+            await account.updatePrefs({...user.preferences, banner:photoURL.href})
+            return true;
+        } catch (error) {
+            console.error(error)
+            return false
+        }
+    }
+
+    async addProfileBannerFromUnsplash(user, url){
+        try {
+            await account.updatePrefs({...user.preferences, banner:url})
+            return true;
+        } catch (error) {
+            console.error(error)
+            return false
+        }
+    }
 }
 
 const database = new Database;
