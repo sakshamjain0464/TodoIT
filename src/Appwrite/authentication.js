@@ -35,9 +35,29 @@ class Authenticator {
         }
     }
 
-    async addPhoneNumberToAccount(phone, password){
+    async addPhoneNumberToAccount(phone, password) {
         try {
             const data = await account.updatePhone(phone, password);
+            console.log(data)
+            return true
+        } catch (error) {
+            return false
+        }
+    }
+
+    async createEmailVerificationLink() {
+        try {
+            const data = await account.createVerification('http://localhost:5173/profile/verifyEmail');
+            console.log(data)
+            return true
+        } catch (error) {
+            return false
+        }
+    }
+
+    async completeEmailVerification(userId, secret) {
+        try {
+            const data = await account.updateVerification(userId, secret);
             console.log(data)
             return true
         } catch (error) {

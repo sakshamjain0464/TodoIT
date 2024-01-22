@@ -42,6 +42,7 @@ export default function AddPhone() {
 
     const hanldeAddPhoneNumber = async (e) =>{
       e.preventDefault()
+      setIsLoading(true)
       const data = await addPhoneNumber(phone, password);
       if(data){
         ShowMessage("Phone Number Added", "success");

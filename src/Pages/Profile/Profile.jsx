@@ -5,12 +5,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import Tooltip from "../../Components/Tooltip/Tooltip";
 import Loader from "../../Components/Loader/Loader";
+import ShowMessage from "../../Components/Message/Message";
 
 const UserProfile = () => {
-  const { user } = Authentication();
+  const { user, createEmailVerification } = Authentication();
   const [showBannerTooltip, setShowBannerTooltip] = useState(false);
   const [showProfileTooltip, setShowProfileTooltip] = useState(false);
   const navigate = useNavigate();
+
+  const handleCreateEmailVerification = async () => {
+    const created = await createEmailVerification();
+    if(created){
+      ShowMessage("Verification Sent to Email!", 'success');
+    }
+    else{
+      ShowMessage("Cannot create verification", 'error')
+    }
+  }
 
   useEffect(() => {
     if (user == null) {
@@ -99,10 +110,15 @@ const UserProfile = () => {
                 {user.emailVerification ? (
                   <i className="fa-solid fa-check text-green-600" />
                 ) : (
-                  <Link className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
+                  <button className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3" onClick={handleCreateEmailVerification}>
                     Verify
-                  </Link>
+                  </button>
                 )}
+                <Link
+                  to={"/profile/addPhone"}
+                  className="bg-green-600 mt-3 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
+                  Update
+                </Link>
               </div>
               <div className="mb-2 flex">
                 <strong>Phone:</strong>
@@ -113,15 +129,15 @@ const UserProfile = () => {
                     {user.phoneVerification ? (
                       <i className="fa-solid fa-check text-green-600" />
                     ) : (
-                      <>
-                        <Link className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
-                          Verify
-                        </Link>
-                        <Link to={'/profile/addPhone'} className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
-                          Update
-                        </Link>
-                      </>
+                      <Link className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
+                        Verify
+                      </Link>
                     )}
+                    <Link
+                      to={"/profile/addPhone"}
+                      className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
+                      Update
+                    </Link>
                   </p>
                 ) : (
                   <Link

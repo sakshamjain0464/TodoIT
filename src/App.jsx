@@ -68,6 +68,25 @@ function App() {
     }
   } 
 
+  const createEmailVerification = async () => {
+    const userData = await authenticator.createEmailVerificationLink();
+    if (userData) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
+
+  const verifyEmail = async (userId,secret) => {
+    const data = await authenticator.completeEmailVerification(userId, secret)
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+
   useEffect(() => {
     if (user == null) {
       (async function () {
@@ -90,7 +109,9 @@ function App() {
         logout,
         createAccount,
         loginViaGoogle,
-        addPhoneNumber
+        addPhoneNumber,
+        createEmailVerification,
+        verifyEmail
       }}>
       <Navbar />
       <MainSection loading={loading}/>

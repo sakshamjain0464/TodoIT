@@ -8,6 +8,7 @@ import Login from "./Pages/Login/Login.jsx";
 import Profile from "./Pages/Profile/Profile.jsx";
 import SignUP from "./Pages/SignUP/SignUP.jsx";
 import AddPhone from "./Pages/AddPhone/AddPhone.jsx";
+import VerifyEmail from "./Pages/verifyEmail/VerifyEmail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
       {
         path: 'profile/addPhone',
         element: <AddPhone />
-      }
+      },
+      {
+        path: 'profile/verifyEmail',
+        element: <VerifyEmail/>
+      },
     ],
   },
 ]);
