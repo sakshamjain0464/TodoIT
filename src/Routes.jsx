@@ -21,39 +21,39 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "login",
+                path: "/login",
                 element: <Login />,
             },
             {
-                path: "signUP",
+                path: "/signUP",
                 element: <SignUP />,
             },
             {
-                path: "profile",
+                path: "/profile",
                 element: <Profile />,
             },
             {
-                path: "profile/addPhone",
+                path: "/profile/addPhone",
                 element: <AddPhone />,
             },
             {
-                path: "profile/verifyEmail",
+                path: "/profile/verifyEmail",
                 element: <VerifyEmail />,
             },
             {
-                path: "profile/uploadProfile",
+                path: "/profile/uploadProfile",
                 element: <UploadProfile />,
             },
             {
-                path: "profile/uploadBanner",
+                path: "/profile/uploadBanner",
                 element: <UploadBanner />,
             },
             {
-                path: "profile/forgotPassword",
+                path: "/profile/forgotPassword",
                 element: <ForgotPassword />,
             },
             {
-                path: "profile/confirmForgotPassword",
+                path: "/profile/confirmForgotPassword",
                 element: <ConfirmForgotPassword />,
             },
         ],
