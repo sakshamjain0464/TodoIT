@@ -47,7 +47,7 @@ export default function TodoContainer({ tag }) {
                       <TodoCard todo={todo} key={todo.$id} />
                     )
                 )}
-            <div className="h-36 max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 w-full">
+            {tag == 'all' && <div className="h-36 max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 w-full">
               {addLoader ? (
                 <Loader />
               ) : (
@@ -62,7 +62,7 @@ export default function TodoContainer({ tag }) {
                   </div>
                 </div>
               )}
-            </div>
+            </div>}
           </div>
         )
       )}

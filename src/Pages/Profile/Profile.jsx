@@ -154,7 +154,7 @@ const UserProfile = () => {
               </div>
 
               <div className="mt-6 mb-2">
-                <Link className="bg-slate-800 sm:text-base text-xsm text-white py-2 px-4 rounded-md hover:bg-slate-600">
+                <Link to={'/profile/changePassword'} className="bg-slate-800 sm:text-base text-xsm text-white py-2 px-4 rounded-md hover:bg-slate-600">
                   Change Password
                 </Link>
               </div>

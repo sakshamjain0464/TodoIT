@@ -11,6 +11,8 @@ import AddPhone from "./Pages/AddPhone/AddPhone.jsx";
 import VerifyEmail from "./Pages/verifyEmail/VerifyEmail.jsx";
 import UploadProfile from "./Pages/UploadProfile/UploadProfile.jsx";
 import UploadBanner from "./Pages/UploadBanner/UploadBanner.jsx";
+import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword.jsx";
+import ConfirmForgotPassword from "./Pages/ConfirmForgotPassword/ConfirmForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: 'profile/uploadBanner',
         element: <UploadBanner />
+      },
+      {
+        path: 'profile/forgotPassword',
+        element: <ForgotPassword />
+      },
+      {
+        path: 'profile/confirmForgotPassword',
+        element: <ConfirmForgotPassword />
       },
     ],
   },

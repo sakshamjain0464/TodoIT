@@ -7,6 +7,7 @@ import authenticator from "./Appwrite/authentication";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import database from "./Appwrite/database";
+import { account } from "./Appwrite/config";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -114,19 +115,23 @@ function App() {
     }
   }
   
-
-  useEffect(() => {
-    if (user == null) {
-      (async function () {
-        setLoading(true);
-        const loggedin = await autoLogin();
-        setLoading(false);
-        if (!loggedin) {
-          navigate("/login");
-        }
-      })();
+  const sendForgotPasswordLink = async(email) => {
+    const data = await authenticator.createForgotPassword(email)
+    if (data) {
+      return true;
+    } else {
+      return false;
     }
-  },[user]);
+  }
+
+  const completeForgotPassword = async(userId, secret, password, confirmPassword) => {
+    const data = await authenticator.confirmForgotPassword(userId, secret, password, confirmPassword)
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   return (
     <AuthenticationProvider
@@ -142,7 +147,9 @@ function App() {
         verifyEmail,
         uploadProfilePhoto,
         uploadBanner,
-        uploadBannerFromUnsplash
+        uploadBannerFromUnsplash,
+        sendForgotPasswordLink,
+        completeForgotPassword
       }}>
       <Navbar />
       <MainSection loading={loading}/>
