@@ -23,24 +23,22 @@ export default function TodoCard({ todo }) {
   const handleTitleInput = (e) => {
     const newTitle = e.target.value;
 
-    if(newTitle.length > 200){
-      ShowMessage("Title cannot be more than 200 characters", 'warning')
+    if (newTitle.length > 200) {
+      ShowMessage("Title cannot be more than 200 characters", "warning");
+    } else {
+      setTitle(newTitle);
     }
-    else{
-      setTitle(newTitle)
-    }
-  }
+  };
 
   const handleDescriptionInput = (e) => {
     const newDesc = e.target.value;
 
-    if(newDesc.length > 800){
-      ShowMessage("Description cannot be more than 800 characters", 'warning')
+    if (newDesc.length > 800) {
+      ShowMessage("Description cannot be more than 800 characters", "warning");
+    } else {
+      setDescription(newDesc);
     }
-    else{
-      setDescription(newDesc)
-    }
-  }
+  };
 
   const todoChangesSave = async () => {
     setLoading(true);
@@ -124,7 +122,15 @@ export default function TodoCard({ todo }) {
         <div
           className={`relative ${
             isComplete ? "bg-gray-300" : "bg-white"
-          } h-full w-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-xl transition-all ${(expanded)?'duration-500':`duration-300 hover:scale-105 ${(!isComplete)?'hover:bg-gradient-to-r hover:from-white hover:to-gray-200':''}`} ease-in`}>
+          } h-full w-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-xl transition-all ${
+            expanded
+              ? "duration-500"
+              : `duration-300 hover:scale-105 ${
+                  !isComplete
+                    ? "hover:bg-gradient-to-r hover:from-white hover:to-gray-200"
+                    : ""
+                }`
+          } ease-in`}>
           <input
             className={`text-xl mb-2 w-full text-ellipsis overflow-hidden bg-transparent ${
               isComplete
@@ -139,7 +145,9 @@ export default function TodoCard({ todo }) {
             className={`text-sm w-full text-ellipsis bg-transparent resize-none ${
               isComplete ? "line-through" : ""
             } 'focus:outline-none active:outline-none mb-5' ${
-              expanded ? "h-[250px] overflow-y-auto" : "h-[22px] overflow-y-hidden"
+              expanded
+                ? "h-[250px] overflow-y-auto"
+                : "h-[22px] overflow-y-hidden"
             } transition-all duration-300 ease-in cursor-text`}
             value={description}
             disabled={isComplete || !isEditing ? true : false}
@@ -223,4 +231,3 @@ export default function TodoCard({ todo }) {
 TodoCard.propTypes = {
   todo: PropTypes.object.isRequired,
 };
-

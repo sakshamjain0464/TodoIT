@@ -62,13 +62,16 @@ function App() {
   };
 
   const addPhoneNumber = async (phone, password) => {
-    const userData = await authenticator.addPhoneNumberToAccount(phone,password);
+    const userData = await authenticator.addPhoneNumberToAccount(
+      phone,
+      password
+    );
     if (userData) {
       return true;
     } else {
       return false;
     }
-  } 
+  };
 
   const createEmailVerification = async () => {
     const userData = await authenticator.createEmailVerificationLink();
@@ -77,61 +80,71 @@ function App() {
     } else {
       return false;
     }
-  } 
+  };
 
-  const verifyEmail = async (userId,secret) => {
-    const data = await authenticator.completeEmailVerification(userId, secret)
+  const verifyEmail = async (userId, secret) => {
+    const data = await authenticator.completeEmailVerification(userId, secret);
     if (data) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   const uploadProfilePhoto = async (photo) => {
-    const data = await database.addProfilePhotoToStorage(user, photo)
+    const data = await database.addProfilePhotoToStorage(user, photo);
     if (data) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   const uploadBanner = async (photo) => {
-    const data = await database.addProfileBannerToStorage(user, photo)
+    const data = await database.addProfileBannerToStorage(user, photo);
     if (data) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   const uploadBannerFromUnsplash = async (url) => {
-    const data = await database.addProfileBannerFromUnsplash(user, url)
+    const data = await database.addProfileBannerFromUnsplash(user, url);
     if (data) {
       return true;
     } else {
       return false;
     }
-  }
-  
-  const sendForgotPasswordLink = async(email) => {
-    const data = await authenticator.createForgotPassword(email)
-    if (data) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  };
 
-  const completeForgotPassword = async(userId, secret, password, confirmPassword) => {
-    const data = await authenticator.confirmForgotPassword(userId, secret, password, confirmPassword)
+  const sendForgotPasswordLink = async (email) => {
+    const data = await authenticator.createForgotPassword(email);
     if (data) {
       return true;
     } else {
       return false;
     }
-  }
+  };
+
+  const completeForgotPassword = async (
+    userId,
+    secret,
+    password,
+    confirmPassword
+  ) => {
+    const data = await authenticator.confirmForgotPassword(
+      userId,
+      secret,
+      password,
+      confirmPassword
+    );
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <AuthenticationProvider
@@ -149,10 +162,10 @@ function App() {
         uploadBanner,
         uploadBannerFromUnsplash,
         sendForgotPasswordLink,
-        completeForgotPassword
+        completeForgotPassword,
       }}>
       <Navbar />
-      <MainSection loading={loading}/>
+      <MainSection loading={loading} />
       <Footer />
       <ToastContainer />
     </AuthenticationProvider>

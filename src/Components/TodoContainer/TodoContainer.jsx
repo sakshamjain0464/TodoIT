@@ -47,22 +47,28 @@ export default function TodoContainer({ tag }) {
                       <TodoCard todo={todo} key={todo.$id} />
                     )
                 )}
-            {tag == 'all' && <div className="h-36 max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 w-full">
-              {addLoader ? (
-                <Loader />
-              ) : (
-                <div className="h-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-lg cursor-pointer active:shadow-none flex items-center justify-center">
-                  <div
-                    className="relative w-full h-full flex flex-col items-center justify-center"
-                    onClick={handleAddTodo}
-                    onMouseEnter={() => setShowAddTooltip(true)}
-                    onMouseLeave={() => setShowAddTooltip(false)}>
-                    <i className="fa-plus text-3xl"></i>
-                    <Tooltip tooltipFunc={showAddTooltip} message={"Add New Todo"} className={"top-2"}/>
+            {tag == "all" && (
+              <div className="h-36 max-h-36 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 w-full">
+                {addLoader ? (
+                  <Loader />
+                ) : (
+                  <div className="h-full p-4 shadow-md rounded-md overflow-hidden hover:shadow-lg cursor-pointer active:shadow-none flex items-center justify-center">
+                    <div
+                      className="relative w-full h-full flex flex-col items-center justify-center"
+                      onClick={handleAddTodo}
+                      onMouseEnter={() => setShowAddTooltip(true)}
+                      onMouseLeave={() => setShowAddTooltip(false)}>
+                      <i className="fa-plus text-3xl"></i>
+                      <Tooltip
+                        tooltipFunc={showAddTooltip}
+                        message={"Add New Todo"}
+                        className={"top-2"}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>}
+                )}
+              </div>
+            )}
           </div>
         )
       )}

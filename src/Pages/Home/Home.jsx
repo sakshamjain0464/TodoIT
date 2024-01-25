@@ -82,12 +82,12 @@ export default function Home() {
         setLoading(true);
         const loggedin = await autoLogin();
         setLoading(false);
-        if(!loggedin){
-          navigate('/login')
+        if (!loggedin) {
+          navigate("/login");
         }
       })();
     }
-  },[user]);
+  }, [user]);
 
   return (
     <div className="sm:h-full h-fit w-[95%] min-h-screen sm:min-h-full">

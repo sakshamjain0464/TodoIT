@@ -48,11 +48,11 @@ class Database {
         }
     }
 
-    async addProfilePhotoToStorage(user, photo){
+    async addProfilePhotoToStorage(user, photo) {
         try {
             const photoData = await storage.createFile(photoBucket, ID.unique(), photo);
             const photoURL = await storage.getFileView(photoBucket, photoData.$id);
-            await account.updatePrefs({...user.preferences, profile:photoURL.href})
+            await account.updatePrefs({ ...user.preferences, profile: photoURL.href })
             return true;
         } catch (error) {
             console.error(error)
@@ -60,11 +60,11 @@ class Database {
         }
     }
 
-    async addProfileBannerToStorage(user, photo){
+    async addProfileBannerToStorage(user, photo) {
         try {
             const photoData = await storage.createFile(photoBucket, ID.unique(), photo);
             const photoURL = await storage.getFileView(photoBucket, photoData.$id);
-            await account.updatePrefs({...user.preferences, banner:photoURL.href})
+            await account.updatePrefs({ ...user.preferences, banner: photoURL.href })
             return true;
         } catch (error) {
             console.error(error)
@@ -72,9 +72,9 @@ class Database {
         }
     }
 
-    async addProfileBannerFromUnsplash(user, url){
+    async addProfileBannerFromUnsplash(user, url) {
         try {
-            await account.updatePrefs({...user.preferences, banner:url})
+            await account.updatePrefs({ ...user.preferences, banner: url })
             return true;
         } catch (error) {
             console.error(error)

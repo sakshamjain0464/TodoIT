@@ -48,7 +48,7 @@ const UserProfile = () => {
                   user.preferences.banner
                     ? {
                         background: `url('${user.preferences.banner}')`,
-                        backgroundPosition:'center',
+                        backgroundPosition: "center",
                         backgroundSize: "cover",
                         backgroundColor: "rgba(255,255,255,0.5)",
                         backdropFilter: "brightness(50%)",
@@ -73,7 +73,7 @@ const UserProfile = () => {
                     />
                   )}
                   <div className="group absolute top-0 rounded-full h-full w-full bg-transparent hover:backdrop-blur-md flex items-center justify-center">
-                    <Link to={'/profile/uploadProfile'}>
+                    <Link to={"/profile/uploadProfile"}>
                       <i
                         className="fa-regular fa-pen-to-square text-[0px] group-hover:text-2xl cursor-pointer hover:text-gray-800"
                         onMouseEnter={() => setShowProfileTooltip(true)}
@@ -88,7 +88,8 @@ const UserProfile = () => {
                   </div>
                 </div>
                 <div className="group absolute top-2 right-5 w-fit h-fit">
-                  <Link to={'/profile/uploadBanner'}
+                  <Link
+                    to={"/profile/uploadBanner"}
                     className="bg-slate-900 sm:text-base text-xs text-white px-3 py-1 rounded-md h-0 w-0"
                     onMouseEnter={() => setShowBannerTooltip(true)}
                     onMouseLeave={() => setShowBannerTooltip(false)}>
@@ -154,7 +155,9 @@ const UserProfile = () => {
               </div>
 
               <div className="mt-6 mb-2">
-                <Link to={'/profile/changePassword'} className="bg-slate-800 sm:text-base text-xsm text-white py-2 px-4 rounded-md hover:bg-slate-600">
+                <Link
+                  to={"/profile/forgotPassword"}
+                  className="bg-slate-800 sm:text-base text-xsm text-white py-2 px-4 rounded-md hover:bg-slate-600">
                   Change Password
                 </Link>
               </div>

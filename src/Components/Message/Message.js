@@ -15,7 +15,7 @@ export default function ShowMessage(message, type) {
       position: toastPosition,
     });
   }
-  else if (type == 'warning'){
+  else if (type == 'warning') {
     toast.warn(message, {
       position: toastPosition
     })

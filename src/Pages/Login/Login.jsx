@@ -104,7 +104,9 @@ export default function Login() {
           className="mb-2 px-2 py-2 bg-slate-800 text-white hover:bg-slate-700 rounded-md cursor-pointer">
           SignUP
         </Link>
-        <Link to={"/profile/forgotPassword"} className="text-slate-800 mb-3 text-xs underline">
+        <Link
+          to={"/profile/forgotPassword"}
+          className="text-slate-800 mb-3 text-xs underline">
           Forgot Password?
         </Link>
       </form>

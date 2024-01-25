@@ -1,6 +1,4 @@
-
-
-export default function Tooltip({tooltipFunc, message, className}) {
+export default function Tooltip({ tooltipFunc, message, className }) {
   return (
     <p
       className={`${

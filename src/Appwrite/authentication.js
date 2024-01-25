@@ -65,7 +65,7 @@ class Authenticator {
         }
     }
 
-    async createForgotPassword(email){
+    async createForgotPassword(email) {
         try {
             const data = await account.createRecovery(email, 'http://localhost:5173/profile/confirmForgotPassword');
             console.log(data)
@@ -75,7 +75,7 @@ class Authenticator {
         }
     }
 
-    async confirmForgotPassword(userId, secret, password, confirmPassword){
+    async confirmForgotPassword(userId, secret, password, confirmPassword) {
         try {
             const data = await account.updateRecovery(userId, secret, password, confirmPassword);
             console.log(data)

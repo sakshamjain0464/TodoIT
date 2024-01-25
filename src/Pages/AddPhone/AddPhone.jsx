@@ -1,64 +1,62 @@
-import { useEffect, useState } from 'react'
-import { Authentication } from '../../Context/UserContext/AuthenticationContext'
-import { Link, useNavigate } from 'react-router-dom'
-import validator from 'validator'
-import Loader from '../../Components/Loader/Loader'
-import ShowMessage from '../../Components/Message/Message'
+import { useEffect, useState } from "react";
+import { Authentication } from "../../Context/UserContext/AuthenticationContext";
+import { Link, useNavigate } from "react-router-dom";
+import validator from "validator";
+import Loader from "../../Components/Loader/Loader";
+import ShowMessage from "../../Components/Message/Message";
 export default function AddPhone() {
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneHidden, setPhoneHidden] = useState(false);
+  const [passwordHidden, setPasswordHidden] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [phone, setPhone] = useState('')
-    const [password, setPassword] = useState('')
-    const [phoneHidden, setPhoneHidden] = useState(false)
-    const [passwordHidden, setPasswordHidden] = useState(false)
-    const [submitDisabled, setSubmitDisabled] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+  const { user, addPhoneNumber } = Authentication();
+  const navigate = useNavigate();
 
-    const {user, addPhoneNumber} = Authentication()
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if(user == null){
-            navigate('/login')
-        }
-    })
-
-    useEffect(() => {
-      if (validator.isMobilePhone(phone) && phone[0] == '+') {
-        setPhoneHidden(false);
-        setSubmitDisabled(false);
-      } else {
-        setPhoneHidden(true);
-        setSubmitDisabled(true);
-      }
-  
-      if (password.length < 8) {
-        setPasswordHidden(true);
-        setSubmitDisabled(true);
-      } else {
-        setPasswordHidden(false);
-        setSubmitDisabled(false);
-      }
-    }, [phone, password]);
-
-    const hanldeAddPhoneNumber = async (e) =>{
-      e.preventDefault()
-      setIsLoading(true)
-      const data = await addPhoneNumber(phone, password);
-      if(data){
-        ShowMessage("Phone Number Added", "success");
-        navigate('/')
-      }
-      else{
-        ShowMessage("Cannot add phone number", "error")
-        navigate('/login')
-      }
+  useEffect(() => {
+    if (user == null) {
+      navigate("/login");
     }
+  });
+
+  useEffect(() => {
+    if (validator.isMobilePhone(phone) && phone[0] == "+") {
+      setPhoneHidden(false);
+      setSubmitDisabled(false);
+    } else {
+      setPhoneHidden(true);
+      setSubmitDisabled(true);
+    }
+
+    if (password.length < 8) {
+      setPasswordHidden(true);
+      setSubmitDisabled(true);
+    } else {
+      setPasswordHidden(false);
+      setSubmitDisabled(false);
+    }
+  }, [phone, password]);
+
+  const hanldeAddPhoneNumber = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const data = await addPhoneNumber(phone, password);
+    if (data) {
+      ShowMessage("Phone Number Added", "success");
+      navigate("/");
+    } else {
+      ShowMessage("Cannot add phone number", "error");
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="sm:w-fit sm:h-fit h-[85%] w-[85%] border-[0.5px] border-slate-900 rounded-lg py-5 sm:px-8 px-5 sm:mt-0 mt-5 text-center">
-        <h1 className="text-3xl">Add/Update Phone Number</h1>
-        <p className='text-xs mt-2'>*Use Country Code With Phone Number</p>
-        <form action="" className="flex flex-col" onSubmit={hanldeAddPhoneNumber}>
+      <h1 className="text-3xl">Add/Update Phone Number</h1>
+      <p className="text-xs mt-2">*Use Country Code With Phone Number</p>
+      <form action="" className="flex flex-col" onSubmit={hanldeAddPhoneNumber}>
         <label htmlFor="phone" className="mb-1 sm:mt-3 w-full text-left">
           Phone
         </label>
@@ -105,5 +103,5 @@ export default function AddPhone() {
         </Link>
       </form>
     </div>
-  )
+  );
 }
