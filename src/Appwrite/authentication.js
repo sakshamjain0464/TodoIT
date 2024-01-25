@@ -16,7 +16,7 @@ class Authenticator {
 
     async loginViaGoogle() {
         try {
-            await account.createOAuth2Session('google', 'http://localhost:5173/', 'http://localhost:5173/login');
+            await account.createOAuth2Session('google', 'https://todoit-jade.vercel.app/', 'https://todoit-jade.vercel.app/login');
             const userData = await account.get()
             const user = { id: userData.$id, name: userData.name, email: userData.email, phone: userData.phone, emailVerification: userData.emailVerification, phoneVerification: userData.phoneVerification, preferences: userData.prefs }
             return user
@@ -47,7 +47,7 @@ class Authenticator {
 
     async createEmailVerificationLink() {
         try {
-            const data = await account.createVerification('http://localhost:5173/profile/verifyEmail');
+            const data = await account.createVerification('https://todoit-jade.vercel.app/profile/verifyEmail');
             console.log(data)
             return true
         } catch (error) {
@@ -67,7 +67,7 @@ class Authenticator {
 
     async createForgotPassword(email) {
         try {
-            const data = await account.createRecovery(email, 'http://localhost:5173/profile/confirmForgotPassword');
+            const data = await account.createRecovery(email, 'https://todoit-jade.vercel.app/profile/confirmForgotPassword');
             console.log(data)
             return true
         } catch (error) {

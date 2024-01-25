@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import MainSection from "./Components/MainSection/MainSection";
 import Footer from "./Components/Footer/Footer";
@@ -7,7 +7,7 @@ import authenticator from "./Appwrite/authentication";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import database from "./Appwrite/database";
-import { account } from "./Appwrite/config";
+import ShowMessage from "./Components/Message/Message";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,12 +24,16 @@ function App() {
   };
 
   const autoLogin = async () => {
+    setLoading(true)
     const userData = await authenticator.autoLogin();
     setUser(userData);
     if (userData) {
-      return true;
+      ShowMessage("LoggedIn", 'success')
+      setLoading(false)
     } else {
-      return false;
+      ShowMessage("Cannot Login Automatically", "error")
+      navigate('/login')
+      setLoading(false)
     }
   };
 
