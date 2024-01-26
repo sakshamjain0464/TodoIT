@@ -95,6 +95,8 @@ export default function UploadBanner() {
           *Go to{" "}
           <a
             href="https://sakshamjain0464.github.io/ShufflIt/"
+            rel="noreferrer"
+            target="_blank"
             className="underline">
             Shufflit
           </a>
