@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import MainSection from "./Components/MainSection/MainSection";
 import Footer from "./Components/Footer/Footer";
@@ -24,16 +24,16 @@ function App() {
   };
 
   const autoLogin = async () => {
-    setLoading(true)
+    setLoading(true);
     const userData = await authenticator.autoLogin();
     setUser(userData);
     if (userData) {
-      ShowMessage("LoggedIn", 'success')
-      setLoading(false)
+      ShowMessage("LoggedIn", "success");
+      setLoading(false);
     } else {
-      ShowMessage("Cannot Login Automatically", "error")
-      navigate('/login')
-      setLoading(false)
+      ShowMessage("Cannot Login Automatically", "error");
+      navigate("/login");
+      setLoading(false);
     }
   };
 
@@ -77,6 +77,15 @@ function App() {
     }
   };
 
+  const updateEmail = async (email, password) => {
+    const userData = await authenticator.updateEmailToAccount(email, password);
+    if (userData) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const createEmailVerification = async () => {
     const userData = await authenticator.createEmailVerificationLink();
     if (userData) {
@@ -88,6 +97,24 @@ function App() {
 
   const verifyEmail = async (userId, secret) => {
     const data = await authenticator.completeEmailVerification(userId, secret);
+    if (data) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const createPhoneVerification = async () => {
+    const userData = await authenticator.createPhoneVerificationCode();
+    if (userData) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const verifyPhone = async (userId, secret) => {
+    const data = await authenticator.completePhoneVerification(userId, secret);
     if (data) {
       return true;
     } else {
@@ -167,6 +194,9 @@ function App() {
         uploadBannerFromUnsplash,
         sendForgotPasswordLink,
         completeForgotPassword,
+        updateEmail,
+        createPhoneVerification,
+        verifyPhone,
       }}>
       <Navbar />
       <MainSection loading={loading} />

@@ -8,7 +8,8 @@ import Loader from "../../Components/Loader/Loader";
 import ShowMessage from "../../Components/Message/Message";
 
 const UserProfile = () => {
-  const { user, createEmailVerification } = Authentication();
+  const { user, createEmailVerification, createPhoneVerification } =
+    Authentication();
   const [showBannerTooltip, setShowBannerTooltip] = useState(false);
   const [showProfileTooltip, setShowProfileTooltip] = useState(false);
   const navigate = useNavigate();
@@ -17,6 +18,16 @@ const UserProfile = () => {
     const created = await createEmailVerification();
     if (created) {
       ShowMessage("Verification Sent to Email!", "success");
+    } else {
+      ShowMessage("Cannot create verification", "error");
+    }
+  };
+
+  const handleCreatePhoneVerification = async () => {
+    const created = await createPhoneVerification();
+    if (created) {
+      ShowMessage("Verification Code Sent!", "success");
+      navigate("/profile/verifyPhone");
     } else {
       ShowMessage("Cannot create verification", "error");
     }
@@ -120,7 +131,7 @@ const UserProfile = () => {
                   </button>
                 )}
                 <Link
-                  to={"/profile/addPhone"}
+                  to={"/profile/updateEmail"}
                   className="bg-green-600 mt-3 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
                   Update
                 </Link>
@@ -134,9 +145,11 @@ const UserProfile = () => {
                     {user.phoneVerification ? (
                       <i className="fa-solid fa-check text-green-600" />
                     ) : (
-                      <Link className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3">
+                      <button
+                        className="bg-green-600 text-xs ml-4 text-white rounded-md hover:bg-green-900 py-1 px-3"
+                        onClick={handleCreatePhoneVerification}>
                         Verify
-                      </Link>
+                      </button>
                     )}
                     <Link
                       to={"/profile/addPhone"}

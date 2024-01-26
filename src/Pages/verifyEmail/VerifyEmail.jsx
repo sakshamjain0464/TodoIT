@@ -1,17 +1,10 @@
-import { useEffect } from "react";
 import { Authentication } from "../../Context/UserContext/AuthenticationContext";
 import ShowMessage from "../../Components/Message/Message";
 import { useNavigate } from "react-router-dom";
 
 export default function VerifyEmail() {
-  const { verifyEmail, user } = Authentication();
+  const { verifyEmail } = Authentication();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user == null) {
-      navigate("/");
-    }
-  });
 
   const handleCompleteVerification = async () => {
     let urlSearchParams = new URLSearchParams(window.location.search);

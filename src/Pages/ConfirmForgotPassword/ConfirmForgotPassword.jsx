@@ -10,7 +10,7 @@ export default function ConfirmForgotPassword() {
   const [confirmPasswordHidden, setConfirmPasswordHidden] = useState(false);
   const navigate = useNavigate();
 
-  const { completeForgotPassword } = Authentication();
+  const { completeForgotPassword, user, logout } = Authentication();
 
   useEffect(() => {
     if (password.length >= 8) {
@@ -39,6 +39,7 @@ export default function ConfirmForgotPassword() {
     );
     if (completed) {
       ShowMessage("Password changed SuccessFully, Login Again", "success");
+      if (user) logout();
       navigate("/");
     } else {
       ShowMessage("An Error Occurred", "error");

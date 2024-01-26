@@ -10,55 +10,64 @@ import UploadProfile from "./Pages/UploadProfile/UploadProfile.jsx";
 import UploadBanner from "./Pages/UploadBanner/UploadBanner.jsx";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword.jsx";
 import ConfirmForgotPassword from "./Pages/ConfirmForgotPassword/ConfirmForgotPassword.jsx";
+import UpdateEmail from "./Pages/updateEmail/UpdateEmail.jsx";
+import VerifyPhone from "./Pages/verifyPhone/VerifyPhone.jsx";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        children: [
-            {
-                path: "",
-                element: <Home />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/signUP",
-                element: <SignUP />,
-            },
-            {
-                path: "/profile",
-                element: <Profile />,
-            },
-            {
-                path: "/profile/addPhone",
-                element: <AddPhone />,
-            },
-            {
-                path: "/profile/verifyEmail",
-                element: <VerifyEmail />,
-            },
-            {
-                path: "/profile/uploadProfile",
-                element: <UploadProfile />,
-            },
-            {
-                path: "/profile/uploadBanner",
-                element: <UploadBanner />,
-            },
-            {
-                path: "/profile/forgotPassword",
-                element: <ForgotPassword />,
-            },
-            {
-                path: "/profile/confirmForgotPassword",
-                element: <ConfirmForgotPassword />,
-            },
-        ],
-    },
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signUP",
+        element: <SignUP />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/profile/addPhone",
+        element: <AddPhone />,
+      },
+      {
+        path: "/profile/updateEmail",
+        element: <UpdateEmail />,
+      },
+      {
+        path: "/profile/verifyEmail",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "/profile/verifyPhone",
+        element: <VerifyPhone />,
+      },
+      {
+        path: "/profile/uploadProfile",
+        element: <UploadProfile />,
+      },
+      {
+        path: "/profile/uploadBanner",
+        element: <UploadBanner />,
+      },
+      {
+        path: "/profile/forgotPassword",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/profile/confirmForgotPassword",
+        element: <ConfirmForgotPassword />,
+      },
+    ],
+  },
 ]);
-
 
 export default router;
