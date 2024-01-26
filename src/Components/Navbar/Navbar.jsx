@@ -53,7 +53,7 @@ export default function Navbar() {
                       ) : (
                         <img
                           className="h-10 w-10 2xl:h-16 2xl:w-16 rounded-full invert-[100%]"
-                          src="./src/assets/user.png"
+                          src="/assets/user.png"
                           alt=""
                         />
                       )}

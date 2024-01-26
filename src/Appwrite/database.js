@@ -20,7 +20,6 @@ class Database {
     async addTodoToDataBase(todo) {
         try {
             const todoData = await databases.createDocument(databaseId, todoCollection, ID.unique(), todo)
-            console.log(todoData)
             return todoData;
         } catch (error) {
             console.error(error)

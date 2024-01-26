@@ -38,7 +38,6 @@ class Authenticator {
     async addPhoneNumberToAccount(phone, password) {
         try {
             const data = await account.updatePhone(phone, password);
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -48,7 +47,6 @@ class Authenticator {
     async updateEmailToAccount(email, password) {
         try {
             const data = await account.updateEmail(email, password);
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -58,7 +56,6 @@ class Authenticator {
     async createEmailVerificationLink() {
         try {
             const data = await account.createVerification('https://todo-it-pi.vercel.app/profile/verifyEmail');
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -68,7 +65,6 @@ class Authenticator {
     async completeEmailVerification(userId, secret) {
         try {
             const data = await account.updateVerification(userId, secret);
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -78,7 +74,6 @@ class Authenticator {
     async createPhoneVerificationCode() {
         try {
             const data = await account.createPhoneVerification();
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -88,7 +83,6 @@ class Authenticator {
     async completePhoneVerification(userId, secret) {
         try {
             const data = await account.updatePhoneVerification(userId, secret);
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -98,7 +92,6 @@ class Authenticator {
     async createForgotPassword(email) {
         try {
             const data = await account.createRecovery(email, 'https://todo-it-pi.vercel.app/profile/confirmForgotPassword');
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -108,7 +101,6 @@ class Authenticator {
     async confirmForgotPassword(userId, secret, password, confirmPassword) {
         try {
             const data = await account.updateRecovery(userId, secret, password, confirmPassword);
-            console.log(data)
             return true
         } catch (error) {
             return false
@@ -118,7 +110,6 @@ class Authenticator {
     async logout() {
         try {
             const data = await account.deleteSession('current');
-            console.log(data)
             return true;
         }
         catch (error) {

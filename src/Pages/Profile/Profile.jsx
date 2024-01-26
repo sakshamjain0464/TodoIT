@@ -78,7 +78,7 @@ const UserProfile = () => {
                     />
                   ) : (
                     <img
-                      src="./src/assets/user.png"
+                      src="/assets/user.png"
                       alt="User"
                       className="h-full w-full invert-100 rounded-full"
                     />
