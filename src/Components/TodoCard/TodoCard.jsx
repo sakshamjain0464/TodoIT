@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Tags } from "../../Context/TagsContext/TagsContext";
 import { Todos } from "../../Context/TodoContext/TodoContext";
 import ShowMessage from "../Message/Message";
 import Loader from "../Loader/Loader";
@@ -13,7 +12,6 @@ export default function TodoCard({ todo }) {
   const [description, setDescription] = useState(todo.description);
   const [loading, setLoading] = useState(false);
   const { updateTodo, completeTodo, removeTodo } = Todos();
-  const { tags } = Tags();
 
   const editButtonHandler = () => {
     setIsEditing(true);
@@ -173,12 +171,9 @@ export default function TodoCard({ todo }) {
               <option key={"no-tag"} value={"no-tag"}>
                 {"no-tag"}
               </option>
-              {tags &&
-                tags.map((tag) => (
-                  <option key={tag} value={tag}>
-                    {tag}
-                  </option>
-                ))}
+              <option key={"important"} value={"important"}>
+                {"important"}
+              </option>
             </select>
           </div>
           <div

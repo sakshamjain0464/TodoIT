@@ -6,7 +6,18 @@ const AuthenticationContext = createContext({
     autoLogin: () => { },
     logout: () => { },
     createAccount: () => { },
-    loginViaGoogle: () => { }
+    loginViaGoogle: () => { },
+    addPhoneNumber: () => { },
+    updateEmail: () => { },
+    createEmailVerification: () => { },
+    verifyEmail: () => { },
+    createPhoneVerification: () => { },
+    verifyPhone: () => { },
+    uploadProfilePhoto: () => { },
+    uploadBanner: () => { },
+    uploadBannerFromUnsplash: () => { },
+    sendForgotPasswordLink: () => { },
+    completeForgotPasswordLink: () => { },
 });
 
 export const AuthenticationProvider = AuthenticationContext.Provider;
