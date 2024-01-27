@@ -1,8 +1,10 @@
 import { ID } from "appwrite";
 import { account } from "./config";
 
+// Classs for Authentication and Usr Services, all the user methods for backend features are wrapped in this class.
 class Authenticator {
     async loginViaEmail(email, password) {
+        // For Email Login
         try {
             await account.createEmailSession(email, password)
             const userData = await account.get()
@@ -15,6 +17,7 @@ class Authenticator {
     }
 
     async loginViaGoogle() {
+        // For Google Login
         try {
             await account.createOAuth2Session('google', 'https://todo-it-pi.vercel.app/', 'https://todo-it-pi.vercel.app/login');
             const userData = await account.get()
@@ -27,6 +30,7 @@ class Authenticator {
     }
 
     async createAccountViaEmail(email, password, name) {
+        // For SignUp, Create New Account is only possible with this method
         try {
             await account.create(ID.unique(), email, password, name)
             return true
@@ -36,8 +40,9 @@ class Authenticator {
     }
 
     async addPhoneNumberToAccount(phone, password) {
+        // Add phone number to account
         try {
-            const data = await account.updatePhone(phone, password);
+            await account.updatePhone(phone, password);
             return true
         } catch (error) {
             return false
@@ -45,8 +50,9 @@ class Authenticator {
     }
 
     async updateEmailToAccount(email, password) {
+        // For Email Update
         try {
-            const data = await account.updateEmail(email, password);
+            await account.updateEmail(email, password);
             return true
         } catch (error) {
             return false
@@ -54,8 +60,9 @@ class Authenticator {
     }
 
     async createEmailVerificationLink() {
+        // For creating an Email verification link and send it to email
         try {
-            const data = await account.createVerification('https://todo-it-pi.vercel.app/profile/verifyEmail');
+            await account.createVerification('https://todo-it-pi.vercel.app/profile/verifyEmail');
             return true
         } catch (error) {
             return false
@@ -63,6 +70,7 @@ class Authenticator {
     }
 
     async completeEmailVerification(userId, secret) {
+        // For Completing user Email Verification from the link
         try {
             const data = await account.updateVerification(userId, secret);
             return true
@@ -72,8 +80,9 @@ class Authenticator {
     }
 
     async createPhoneVerificationCode() {
+        //Generating user phone verification code
         try {
-            const data = await account.createPhoneVerification();
+            await account.createPhoneVerification();
             return true
         } catch (error) {
             return false
@@ -81,6 +90,7 @@ class Authenticator {
     }
 
     async completePhoneVerification(userId, secret) {
+        // Verify the user phone verification code
         try {
             const data = await account.updatePhoneVerification(userId, secret);
             return true
@@ -90,8 +100,9 @@ class Authenticator {
     }
 
     async createForgotPassword(email) {
+        // Creating a password recovery
         try {
-            const data = await account.createRecovery(email, 'https://todo-it-pi.vercel.app/profile/confirmForgotPassword');
+            await account.createRecovery(email, 'https://todo-it-pi.vercel.app/profile/confirmForgotPassword');
             return true
         } catch (error) {
             return false
@@ -99,8 +110,9 @@ class Authenticator {
     }
 
     async confirmForgotPassword(userId, secret, password, confirmPassword) {
+        // For Completing the forgot password
         try {
-            const data = await account.updateRecovery(userId, secret, password, confirmPassword);
+            await account.updateRecovery(userId, secret, password, confirmPassword);
             return true
         } catch (error) {
             return false
@@ -108,8 +120,9 @@ class Authenticator {
     }
 
     async logout() {
+        //For Logout
         try {
-            const data = await account.deleteSession('current');
+            await account.deleteSession('current');
             return true;
         }
         catch (error) {
@@ -119,6 +132,7 @@ class Authenticator {
     }
 
     async autoLogin() {
+        // For Auto Login
         try {
             const userData = await account.get('current')
             const user = { id: userData.$id, name: userData.name, email: userData.email, phone: userData.phone, emailVerification: userData.emailVerification, phoneVerification: userData.phoneVerification, preferences: userData.prefs }
@@ -130,4 +144,6 @@ class Authenticator {
 }
 
 const authenticator = new Authenticator();
+
+// The object of the class is returned, directly use the authenticator method for user part in backend
 export default authenticator;

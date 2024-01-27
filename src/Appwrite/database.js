@@ -2,6 +2,8 @@ import { ID, Query } from 'appwrite';
 import { databases, storage } from './config'
 import { account } from './config';
 
+// For accessing databases and storage
+
 const databaseId = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const todoCollection = import.meta.env.VITE_APPWRITE_TODO_COLLECTION_ID
 const photoBucket = import.meta.env.VITE_APPWRITE_PHOTOS_BUCKET_ID
@@ -83,4 +85,6 @@ class Database {
 }
 
 const database = new Database;
+
+// The object is exported, directly use this object to interact with database and storage
 export default database;
